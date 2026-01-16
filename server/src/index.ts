@@ -1,9 +1,10 @@
-import "dotenv/config";
+// import "dotenv/config";
+import { env } from "./config/env";
 import express from "express";
 import cors from "cors";
 
 const app = express();
-const PORT = process.env.PORT || 5000;
+const PORT = env.PORT;
 
 app.use(cors());
 app.use(express.json());
