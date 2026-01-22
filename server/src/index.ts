@@ -3,6 +3,8 @@ import { env } from "./config/env";
 import express from "express";
 import cors from "cors";
 
+import { connectDb } from "./config/dbconnection";
+
 const app = express();
 const PORT = env.PORT;
 
@@ -13,6 +15,18 @@ app.get("/", (_, res) => {
   res.json({ message: "Server is running" });
 });
 
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
+const bootstrap = async () : Promise<void> => {
+  try {
+    await connectDb();
+    
+    app.listen(PORT, () => {
+      console.log(`Server running on port ${PORT}`);
+    });
+
+  } catch (err) {
+    console.log("Error while connecting ", err);
+    process.exit(1);
+  }
+}
+
+bootstrap();

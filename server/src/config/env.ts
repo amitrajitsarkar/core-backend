@@ -6,10 +6,19 @@ const envSchema = z
     NODE_ENV: z
       .enum(["development", "test", "production"])
       .default("development"),
+    MONGO_URI: z.string().refine((val) => {
+      try {
+        new URL(val);
+        return true;
+      } catch {
+        return false;
+      }
+    }, { message: "Invalid url from MONGO_URI" })
   })
   .strict();
 
 export const env = envSchema.parse({
   PORT: process.env.PORT,
   NODE_ENV: process.env.NODE_ENV,
+  MONGO_URI: process.env.MONGO_URI,
 });
