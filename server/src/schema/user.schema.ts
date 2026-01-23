@@ -1,0 +1,10 @@
+import { z } from "zod";
+
+export const createUserSchema = z.object({
+  body: z.object({
+    username: z.string().min(2),
+    password: z.string().min(4, "Password must be at least 4 characters long"),
+  }),
+});
+
+export type CreateUserInput = z.infer<typeof createUserSchema>["body"];

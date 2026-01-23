@@ -15,18 +15,17 @@ app.get("/", (_, res) => {
   res.json({ message: "Server is running" });
 });
 
-const bootstrap = async () : Promise<void> => {
+const bootstrap = async (): Promise<void> => {
   try {
     await connectDb();
-    
+
     app.listen(PORT, () => {
       console.log(`Server running on port ${PORT}`);
     });
-
   } catch (err) {
     console.log("Error while connecting ", err);
     process.exit(1);
   }
-}
+};
 
 bootstrap();
