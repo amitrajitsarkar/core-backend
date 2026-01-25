@@ -27,6 +27,19 @@ class AuthService {
       username: user.username,
     };
   }
+
+  async login(data:CreateUserInput){
+    const User  = await userModel.findOne({username:data.username});
+    if(!User) throw new Error("Username doesn't exist !") ;
+
+    const hashedPassword = User.password ;
+    const user = await bcrypt.compare(data.password , hashedPassword);
+    if(!user) throw new Error("Wrong Password") ;
+
+    return {
+      username : User.username,
+    }
+  }
 }
 
 export default AuthService;

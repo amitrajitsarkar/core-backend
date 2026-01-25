@@ -7,13 +7,13 @@ class ApiResponse<T> {
   constructor(
     status: number,
     message: string,
-    data: T | null = null,
+    data: T | null = null, //This left as null cause we can also check error later on
     success = true,
   ) {
-    this.success = success;
     this.status = status;
     this.message = message;
     this.data = data;
+    this.success = success;
   }
 }
 
