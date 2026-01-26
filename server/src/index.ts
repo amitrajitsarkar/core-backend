@@ -8,6 +8,7 @@ import { connectDb } from "./config/dbconnection";
 
 import signupRouter from "./routes/signup.routes";
 import loginRouter from "./routes/login.routes"
+import errorHandler from "./middleware/errorHandler.middlewares";
 
 const app = express();
 const PORT = env.PORT;
@@ -37,3 +38,5 @@ const bootstrap = async (): Promise<void> => {
 };
 
 bootstrap();
+
+app.use(errorHandler);

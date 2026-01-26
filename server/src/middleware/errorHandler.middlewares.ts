@@ -1,5 +1,5 @@
 import { Request,Response,NextFunction } from "express";
-import conflictError from "../utils/AppError";
+import {conflictError} from "../utils/specificErrors";
 import ApiResponse from "../utils/ApiResponse";
 const errorHandler = (err:any , req:Request, res:Response ,next : NextFunction)=>{
     if(err instanceof conflictError){
@@ -12,3 +12,5 @@ const errorHandler = (err:any , req:Request, res:Response ,next : NextFunction)=
             new ApiResponse(500, "Internal Server Error", null, false)
         );
 }
+
+export default errorHandler ;

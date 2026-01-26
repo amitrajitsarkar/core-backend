@@ -1,12 +1,13 @@
-class conflictError extends Error {
-    statusCode : number ;
+class AppError extends Error{
+    public readonly statusCode: number;
+    public readonly isOperational: boolean = true;
 
-    constructor( statusCode : number){
-        const message = "User Allready Exists"
+    constructor(message:string , statusCode:number){
         super(message);
-        this.statusCode = statusCode ;
-        Error.captureStackTrace(this, this.constructor);
+        this.statusCode = statusCode;
+
+        Error.captureStackTrace(this,this.constructor);
     }
 }
 
-export default conflictError;
+export default AppError ;

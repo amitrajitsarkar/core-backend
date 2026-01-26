@@ -1,12 +1,14 @@
 import { env } from "../config/env";
 import bcrypt from "bcrypt";
 import { userModel } from "../model/userModel";
-import type { CreateUserInput } from "../schema/user.schema";
+import type { CreateUserInputType } from "../schema/user.schema";
+import type { loginSchemaType } from "../schema/login.schema";
+import {conflictError} from "../utils/specificErrors";
 
 class AuthService {
-  async signup(data: CreateUserInput) {
+  async signup(data: CreateUserInputType) {
     if (await userModel.exists({ username: data.username })) {
-      throw new Error("Username already exist");
+      throw new conflictError();
     }
 
     const SALT: number = env.SALT;
@@ -28,7 +30,7 @@ class AuthService {
     };
   }
 
-  async login(data:CreateUserInput){
+  async login(data:loginSchemaType){
     const User  = await userModel.findOne({username:data.username});
     if(!User) throw new Error("Username doesn't exist !") ;
 

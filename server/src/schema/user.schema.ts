@@ -5,4 +5,4 @@ export const createUserSchema = z.object({
     password: z.string().min(4, "Password must be at least 4 characters long"),
   });
 
-export type CreateUserInput = z.infer<typeof createUserSchema>;
+export type CreateUserInputType = z.infer<typeof createUserSchema>;
