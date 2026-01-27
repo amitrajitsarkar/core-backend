@@ -2,13 +2,15 @@
 import { env } from "./config/env";
 import express from "express";
 import cors from "cors";
-import morgan from "morgan"
+import morgan from "morgan";
 
 import { connectDb } from "./config/dbconnection";
 
-import signupRouter from "./routes/signup.routes";
-import loginRouter from "./routes/login.routes"
 import errorHandler from "./middleware/errorHandler.middlewares";
+
+import signupRouter from "./routes/signup.routes";
+import loginRouter from "./routes/login.routes";
+import deleteUserRouter from "./routes/deleteUser.routes";
 
 const app = express();
 const PORT = env.PORT;
@@ -22,7 +24,8 @@ app.get("/", (_, res) => {
 });
 
 app.use(signupRouter);
-app.use(loginRouter)
+app.use(loginRouter);
+app.use(deleteUserRouter);
 
 const bootstrap = async (): Promise<void> => {
   try {

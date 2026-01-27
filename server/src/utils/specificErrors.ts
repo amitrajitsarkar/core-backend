@@ -1,3 +1,4 @@
+import type { ZodFlattenedErrors } from "../@types/ZodFlattenedErrors";
 import AppError from "./AppError";
 
 export class conflictError extends AppError {
@@ -32,5 +33,18 @@ export class BadRequestError extends AppError {
     
     constructor(message: string = "Bad request") {
         super(message, 400);
+    }
+}
+
+export class ZodValidationError extends AppError {
+    public readonly error : ZodFlattenedErrors ; 
+    constructor(error:ZodFlattenedErrors) {
+        super("Zod validation Error", 400);
+        this.error = error;
+    }
+}
+export class WrongCredential extends AppError {
+    constructor(message:string = "Lacks valid authentication credentials"){
+        super(message,401) ; 
     }
 }
