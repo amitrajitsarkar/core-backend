@@ -7,6 +7,6 @@ import { deleteUserSchema } from "../schema/deleteUser.schema";
 const deleteUserRouter = Router(); 
 const deleteController = new UpdateController();
 
-deleteUserRouter.post("/delete", validate(deleteUserSchema) , deleteController.delete);
+deleteUserRouter.delete("/delete", validate(deleteUserSchema) , deleteController.delete);
 
 export default deleteUserRouter;
