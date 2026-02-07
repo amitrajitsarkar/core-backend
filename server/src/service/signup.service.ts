@@ -1,4 +1,5 @@
 import { env } from "../config/env";
+import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import { userModel } from "../model/userModel";
 import type { CreateUserInputType } from "../schema/user.schema";
@@ -12,6 +13,7 @@ class AuthService {
     }
 
     const SALT: number = env.SALT;
+    
     if (!SALT) {
       throw new customErrors.SaltError();
     }
