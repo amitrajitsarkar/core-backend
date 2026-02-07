@@ -3,7 +3,7 @@ import bcrypt from "bcrypt";
 import { userModel } from "../model/userModel";
 import type { CreateUserInputType } from "../schema/user.schema";
 import type { loginSchemaType } from "../schema/login.schema";
-import * as customErrors from "../utils/specificErrors" // import as namespace
+import * as customErrors from "../utils/specificErrors"; // import as namespace
 
 class AuthService {
   async signup(data: CreateUserInputType) {
@@ -30,17 +30,17 @@ class AuthService {
     };
   }
 
-  async login(data:loginSchemaType){
-    const User  = await userModel.findOne({username:data.username});
-    if(!User) throw new customErrors.NotFoundError();
+  async login(data: loginSchemaType) {
+    const User = await userModel.findOne({ username: data.username });
+    if (!User) throw new customErrors.NotFoundError();
 
-    const hashedPassword = User.password ;
-    const user = await bcrypt.compare(data.password , hashedPassword);
-    if(!user) throw new customErrors.WrongCredential();
+    const hashedPassword = User.password;
+    const user = await bcrypt.compare(data.password, hashedPassword);
+    if (!user) throw new customErrors.WrongCredential();
 
     return {
-      username : User.username,
-    }
+      username: User.username,
+    };
   }
 }
 
