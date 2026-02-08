@@ -1,13 +1,17 @@
 import { env } from "../config/env";
-import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import { userModel } from "../model/userModel";
 import type { CreateUserInputType } from "../schema/user.schema";
 import type { loginSchemaType } from "../schema/login.schema";
 import * as customErrors from "../utils/specificErrors"; // import as namespace
-import { createSecretKey } from "node:crypto";
+import { token } from "morgan";
+import CreateToken from "../utils/createToken";
+import crypto from "node:crypto";
+import { refresh_tokenModel } from "../model/refresh_token";
+
 
 class AuthService {
+  private createToken = new CreateToken()
   async signup(data: CreateUserInputType) {
     if (await userModel.exists({ username: data.username })) {
       throw new customErrors.conflictError();
@@ -25,6 +29,7 @@ class AuthService {
       username: data.username,
       password: hashed,
       createdAt: Date.now(),
+      role: "user",
     });
 
     return {
@@ -34,6 +39,8 @@ class AuthService {
   }
 
   async login(data: loginSchemaType) {
+    
+
     const User = await userModel.findOne({ username: data.username });
     if (!User) throw new customErrors.NotFoundError();
     
@@ -41,28 +48,34 @@ class AuthService {
     const user = await bcrypt.compare(data.password, hashedPassword);
     if (!user) throw new customErrors.WrongCredential();
     
-    const ACCESS_SECRET_KEY : string = env.ACCESS_SECRET_KEY;
-    const REFRESH_SECRET_KEY : string = env.REFRESH_SECRET_KEY;
-    const accessToken = jwt.sign(
-      { id : User.id,
-        role : 'admin'
-      },
-      ACCESS_SECRET_KEY,
-      {expiresIn : '1h'}
-    );
+// create token -- util
 
-    const refreshToke = jwt.sign(
-      {
-        id:User.id
-      },
-      REFRESH_SECRET_KEY,
-      {
-        expiresIn : '7days'
-      }
-    )
+    const accessToken = this.createToken.createAccessToken(User);
+    const refreshToken = this.createToken.createRefreshToken(User);
+    
+
+    
+
+// toeken handler -- for bd storage hashing .
+const REFRESH_TTL_MS = 7 * 24 * 60 * 60 * 1000;
+const expiresin  = Date.now() + REFRESH_TTL_MS ;
+console.log(expiresin); //
+const hashdRefreshToken = crypto.createHash("sha256").update(refreshToken).digest("hex");
+const refreshTokenExists = await refresh_tokenModel.findOne({userId:User._id});
+if(refreshTokenExists){
+  await refresh_tokenModel.deleteOne({userId:User._id});
+}
+await refresh_tokenModel.create({
+  userId:User._id,
+  createdAt : Date.now() ,
+  expiresAt : new Date(expiresin),
+  refresh_token : hashdRefreshToken
+})
 
     return {
       username: User.username,
+      accessToken,
+      refreshToken
     };
   }
 }

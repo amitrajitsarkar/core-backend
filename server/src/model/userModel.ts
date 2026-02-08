@@ -6,22 +6,25 @@ const UserSchema = new Schema({
   username: {
     type: String,
     required: true,
+    unique:true,
   },
   password: {
     type: String,
     required: true,
   },
   createdAt: {
-    type: Number,
+    type: Date,
   },
-  role :{
-    type : String,
+  role: {
+    type: String,
+    enum: ["user", "admin"],
+    default: "user"
   },
   refreshToken :{
     type : String,
   },
   expiresIn :{
-    type : Number,
+    type : Date,
   }
 });
 
