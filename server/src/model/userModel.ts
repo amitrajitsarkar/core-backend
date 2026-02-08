@@ -14,6 +14,15 @@ const UserSchema = new Schema({
   createdAt: {
     type: Number,
   },
+  role :{
+    type : String,
+  },
+  refreshToken :{
+    type : String,
+  },
+  expiresIn :{
+    type : Number,
+  }
 });
 
 UserSchema.index({ createdAt: -1 });

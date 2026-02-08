@@ -18,7 +18,8 @@ const envSchema = z
       { message: "Invalid url from MONGO_URI" },
     ),
     SALT: z.coerce.number().min(10).default(12),
-    SECRET_KEY : z.string().min(64, "JWT secret must be at least 64 characters"),
+    ACCESS_SECRET_KEY : z.string().min(64, "JWT secret must be at least 64 characters"),
+    REFRESH_SECRET_KEY : z.string().min(64, "JWT secret must be at least 64 characters"),
   })
   .strict();
 
@@ -27,5 +28,6 @@ export const env = envSchema.parse({
   NODE_ENV: process.env.NODE_ENV,
   MONGO_URI: process.env.MONGO_URI,
   SALT: process.env.SALT,
-  SECRET_KEY: process.env.SECRET_KEY,
+  ACCESS_SECRET_KEY: process.env.ACCESS_SECRET_KEY,
+  REFRESH_SECRET_KEY: process.env.REFRESH_SECRET_KEY,
 });
