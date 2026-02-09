@@ -3,6 +3,7 @@ import bcrypt from "bcrypt";
 import { userModel } from "../model/userModel";
 import type { CreateUserInputType } from "../schema/user.schema";
 import type { loginSchemaType } from "../schema/login.schema";
+import type { UserTypes } from "../@types/UserFromDb";
 import * as customErrors from "../utils/specificErrors"; // import as namespace
 import { token } from "morgan";
 import CreateToken from "../utils/createToken";
@@ -11,7 +12,7 @@ import { refresh_tokenModel } from "../model/refresh_token";
 
 
 class AuthService {
-  private createToken = new CreateToken()
+  private createToken = new CreateToken();
   async signup(data: CreateUserInputType) {
     if (await userModel.exists({ username: data.username })) {
       throw new customErrors.conflictError();
@@ -48,29 +49,11 @@ class AuthService {
     const user = await bcrypt.compare(data.password, hashedPassword);
     if (!user) throw new customErrors.WrongCredential();
     
-// create token -- util
 
     const accessToken = this.createToken.createAccessToken(User);
     const refreshToken = this.createToken.createRefreshToken(User);
-    
 
-    
-
-// toeken handler -- for bd storage hashing .
-const REFRESH_TTL_MS = 7 * 24 * 60 * 60 * 1000;
-const expiresin  = Date.now() + REFRESH_TTL_MS ;
-console.log(expiresin); //
-const hashdRefreshToken = crypto.createHash("sha256").update(refreshToken).digest("hex");
-const refreshTokenExists = await refresh_tokenModel.findOne({userId:User._id});
-if(refreshTokenExists){
-  await refresh_tokenModel.deleteOne({userId:User._id});
-}
-await refresh_tokenModel.create({
-  userId:User._id,
-  createdAt : Date.now() ,
-  expiresAt : new Date(expiresin),
-  refresh_token : hashdRefreshToken
-})
+    await this.storeRefreshToken(User,refreshToken) ;
 
     return {
       username: User.username,
@@ -78,6 +61,24 @@ await refresh_tokenModel.create({
       refreshToken
     };
   }
+
+  private async storeRefreshToken(User : UserTypes , refreshToken:string){
+    const REFRESH_TTL_MS = 7 * 24 * 60 * 60 * 1000;
+    const expiresin  = Date.now() + REFRESH_TTL_MS ;
+    const hashdRefreshToken = crypto.createHash("sha256").update(refreshToken).digest("hex");
+    const refreshTokenExists = await refresh_tokenModel.findOne({userId:User._id});
+    if(refreshTokenExists){
+      await refresh_tokenModel.deleteOne({userId:User._id});
+    }
+    await refresh_tokenModel.create({
+      userId:User._id,
+      createdAt : Date.now() ,
+      expiresAt : new Date(expiresin),
+      refresh_token : hashdRefreshToken
+    })
+  }
 }
 
 export default AuthService;
+
+
