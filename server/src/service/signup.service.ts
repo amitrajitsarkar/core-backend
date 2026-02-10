@@ -77,6 +77,11 @@ class AuthService {
       refresh_token : hashdRefreshToken
     })
   }
+
+  private sendAccessToken(){
+    // create the tokern sending via cookie
+    
+  }
 }
 
 export default AuthService;

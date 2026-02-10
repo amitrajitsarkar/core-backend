@@ -28,6 +28,12 @@ export class UnauthorizedError extends AppError {
         super(message, 401);
     }
 }
+export class UnauthorizedToken extends AppError {
+
+    constructor(message: string = 'Token not found') {
+        super(message, 401);
+    }
+}
 
 export class BadRequestError extends AppError {
     

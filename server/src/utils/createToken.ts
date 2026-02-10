@@ -3,7 +3,6 @@ import { UserTypes } from "../@types/UserFromDb";
 import jwt from "jsonwebtoken";
 
 
-
 class CreateToken {
 
     createAccessToken  = function signAccessToken(User:UserTypes){
@@ -13,7 +12,7 @@ class CreateToken {
                 role : User.role? User.role : "user"
             },
             ACCESS_SECRET_KEY,
-            {expiresIn : '1h'}
+            {expiresIn : '15s'}
             );
         return accessToken;
         }
