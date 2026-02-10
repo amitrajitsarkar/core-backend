@@ -8,7 +8,7 @@ class updateService {
         }) ;
 
         if(!deletedUser){
-            throw new NotFoundError("User not found");
+            throw new NotFoundError("Cannot delete user: User not found");
         }
 
         return {

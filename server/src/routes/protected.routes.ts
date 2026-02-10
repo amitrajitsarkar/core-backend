@@ -6,5 +6,6 @@ const p = new Protected();
 const protectedRoutes = Router();
 
 protectedRoutes.get("/protected" ,jwtHandler,p.protectedController);
+protectedRoutes.get("/protected/refresh",p.refreshController);
 
 export default protectedRoutes ;

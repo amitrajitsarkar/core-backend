@@ -16,8 +16,7 @@ class CreateToken {
             );
         return accessToken;
         }
-    createRefreshToken
-  = function signRefreshToken(User:UserTypes){
+    createRefreshToken = function signRefreshToken(User:UserTypes){
         const REFRESH_SECRET_KEY : string = env.REFRESH_SECRET_KEY;
         const refreshToken = jwt.sign(
               {

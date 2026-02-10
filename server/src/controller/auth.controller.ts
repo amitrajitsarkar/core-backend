@@ -1,7 +1,6 @@
 import AuthService from "../service/signup.service";
 import {Request,Response} from "express";
 import ApiResponse from "../utils/ApiResponse";
-import { tr } from "zod/v4/locales";
 
 class AuthController {
   private authlogic = new AuthService();
