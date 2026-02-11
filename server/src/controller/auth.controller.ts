@@ -32,7 +32,10 @@ class AuthController {
     })  
 
     res.status(200).json(
-      new ApiResponse(200, "User logged in successfully", user.username)
+      new ApiResponse(200, "User logged in successfully",{
+        "username" : user.username,
+        "role" : user.role,
+      })
     );
   }
   

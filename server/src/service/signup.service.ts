@@ -29,6 +29,7 @@ class AuthService {
     const user = await userModel.create({
       username: data.username,
       password: hashed,
+      email:data.email,
       createdAt: Date.now(),
       role: "user",
     });
@@ -58,7 +59,8 @@ class AuthService {
     return {
       username: User.username,
       accessToken,
-      refreshToken
+      refreshToken,
+      role:User.role
     };
   }
 

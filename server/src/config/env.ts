@@ -20,6 +20,20 @@ const envSchema = z
     SALT: z.coerce.number().min(10).default(12),
     ACCESS_SECRET_KEY : z.string().min(64, "JWT secret must be at least 64 characters"),
     REFRESH_SECRET_KEY : z.string().min(64, "JWT secret must be at least 64 characters"),
+    ADMIN_USERNAME: z.string().min(2),
+    ADMIN_PASSWORD:z.string()
+    .regex(/[A-Z]/,"should have one upperCase")
+    .regex(/[a-z]/,"should have one lower case")
+    .regex(/[!@#$%&]/, "Must have a special character")
+    .refine((pwd) => {
+      const match = (pwd.match(/[0-9]/g) || []).length;
+
+      // if(match >=2) return true ;
+      // return false ;  or simply
+
+      return match >= 2;
+    }, "Must have 2 numbers"),
+    ADMIN_EMAIL:z.email(),
   })
   .strict();
 
@@ -30,4 +44,7 @@ export const env = envSchema.parse({
   SALT: process.env.SALT,
   ACCESS_SECRET_KEY: process.env.ACCESS_SECRET_KEY,
   REFRESH_SECRET_KEY: process.env.REFRESH_SECRET_KEY,
+  ADMIN_USERNAME:process.env.ADMIN_USERNAME,
+  ADMIN_PASSWORD:process.env.ADMIN_PASSWORD,
+  ADMIN_EMAIL:process.env.ADMIN_EMAIL,
 });
