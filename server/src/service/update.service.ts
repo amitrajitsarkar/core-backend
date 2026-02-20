@@ -28,8 +28,10 @@ class updateService {
         const user = userModel.findByIdAndUpdate(
             id,
             {$set:{role}},
-            {new:true} 
+            {new:true} // returns the new user model with updated data
         )
+
+        return user;
     }
 }
 
