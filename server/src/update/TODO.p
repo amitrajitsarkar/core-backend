@@ -1,5 +1,6 @@
 #1 . Have to implement the delete user logic in a different class. ✅
-#2 . JWT auth implement will be added.
+#2 . JWT auth implement will be added. ✅
+#2.1 Seeder for admin , "./promote" end point -- only allow admin
 #3 . "Update" may also be implemented. 
 #3.1. the OAuth have to be implemented .
 #4 . some kind of transaction in the mongo -- plz dont but nvrmd....

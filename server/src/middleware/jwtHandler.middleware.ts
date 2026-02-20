@@ -2,6 +2,7 @@ import { Request,Response,NextFunction } from "express";
 import * as E from "../utils/specificErrors"
 import { env } from "../config/env";
 import jwt from "jsonwebtoken";
+import { reqUserPayload } from "../@types/jwt";
 
 const jwtHandler = (req:Request,res:Response,next:NextFunction)=>{
     const {accessToken} = req.cookies; 
@@ -11,9 +12,9 @@ const jwtHandler = (req:Request,res:Response,next:NextFunction)=>{
     }
 
     try{
-        const decoded = jwt.verify(accessToken,env.ACCESS_SECRET_KEY);
+        const decoded = jwt.verify(accessToken,env.ACCESS_SECRET_KEY) as reqUserPayload;
 
-        // req.user=decoded; 
+        req.user=decoded; 
         next();
     }catch (error) {
         if (error instanceof Error && error.name === 'TokenExpiredError') {
