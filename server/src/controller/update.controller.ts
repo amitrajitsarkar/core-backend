@@ -28,8 +28,8 @@ export class UpdateController {
 
   patchUserRole = async (req: Request, res: Response,next:NextFunction) =>{
       try{
-        const user = await this.updateLogic.patchuserRole(req.body);
-        const updatedTo= req.params.role;
+        const user = await this.updateLogic.patchuserRole(req);
+        const updatedTo= req.body.role;
         if(!user || !updatedTo){
             throw new E.BadRequestError("couldn't get user or target Role for response");
         }

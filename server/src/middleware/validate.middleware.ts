@@ -26,12 +26,12 @@ class validatebyZod{
 
     validateTargetRole = (req:Request, res: Response, next: NextFunction) => {
     
-        const targetRole = req.params.role;
+        const targetRole = req.body.role;
         if(!targetRole){
             throw new E.BadRequestError("target role is not available");
         }
 
-        const roleSchema = z.enum(["user" , "developer" , "admin"]);
+        const roleSchema = z.enum(["user" , "developer" , "moderator"]);
 
         const result = roleSchema.safeParse(targetRole);
 

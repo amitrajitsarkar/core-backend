@@ -32,7 +32,7 @@ class AuthController {
     })  
 
     req.role = user.role ;
-    console.log(req.role);
+
 
     res.status(200).json(
       new ApiResponse(200, "User logged in successfully",{
