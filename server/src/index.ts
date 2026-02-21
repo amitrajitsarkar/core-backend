@@ -13,6 +13,7 @@ import signupRouter from "./routes/signup.routes";
 import loginRouter from "./routes/login.routes";
 import deleteUserRouter from "./routes/deleteUser.routes";
 import protectedRoutes from "./routes/protected.routes";
+import promote from "./routes/promote.routes";
 
 const app = express();
 const PORT = env.PORT;
@@ -30,6 +31,8 @@ app.use(signupRouter);
 app.use(loginRouter);
 app.use(deleteUserRouter);
 app.use(protectedRoutes);
+app.use("/admin",promote);
+
 
 const bootstrap = async (): Promise<void> => {
   try {

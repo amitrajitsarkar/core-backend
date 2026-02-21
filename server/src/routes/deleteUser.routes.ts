@@ -1,12 +1,13 @@
 import { Router } from "express";
 import { UpdateController } from "../controller/update.controller";
-import { validate } from "../middleware/validate.middleware";
-import { deleteUserSchema } from "../schema/deleteUser.schema";
+import { updateUserSchema } from "../schema/deleteUser.schema";
+import validatebyZod from "../middleware/validate.middleware";
 
+const validateByZod = new validatebyZod();
 
 const deleteUserRouter = Router(); 
 const deleteController = new UpdateController();
 
-deleteUserRouter.delete("/delete", validate(deleteUserSchema) , deleteController.delete);
+deleteUserRouter.delete("/delete", validateByZod.validate(updateUserSchema), deleteController.delete);
 
 export default deleteUserRouter;

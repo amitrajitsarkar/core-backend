@@ -1,7 +1,7 @@
 import { Response, Request, NextFunction } from "express";
 import * as E from "../utils/specificErrors"
-
-const validateRole = (req:Request ,res:Response,next:NextFunction)=>{
+// checks if the login user is admin or not if not --> not allowed
+const validateAdmin = (req:Request ,res:Response,next:NextFunction)=>{
     try{
         if(req.user && req.user.role == "admin"){
             next();
@@ -13,4 +13,4 @@ const validateRole = (req:Request ,res:Response,next:NextFunction)=>{
     }
 }
 
-export default validateRole;
+export default validateAdmin;

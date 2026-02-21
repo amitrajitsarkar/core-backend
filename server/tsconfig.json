@@ -10,7 +10,7 @@
     // See also https://aka.ms/tsconfig/module
     "module": "CommonJS",
     "target": "ES2020",
-    "types": ["node", "express"],
+    "typeRoots": ["./src/@types", "./node_modules/@types"],
     // For nodejs:
     "lib": ["es2020", "DOM"],
 
