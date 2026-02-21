@@ -13,7 +13,7 @@ const jwtHandler = (req:Request,res:Response,next:NextFunction)=>{
 
     try{
         const decoded = jwt.verify(accessToken,env.ACCESS_SECRET_KEY) as reqUserPayload;
-
+    
         req.user=decoded; 
         next();
     }catch (error) {
