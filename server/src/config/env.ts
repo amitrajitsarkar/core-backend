@@ -34,17 +34,25 @@ const envSchema = z
       return match >= 2;
     }, "Must have 2 numbers"),
     ADMIN_EMAIL:z.email(),
+    GOOGLE_CLIENT_ID:z.string(),
+    GOOGLE_CLIENT_SECRET:z.string()
   })
   .strict();
 
 export const env = envSchema.parse({
   PORT: process.env.PORT,
+
   NODE_ENV: process.env.NODE_ENV,
   MONGO_URI: process.env.MONGO_URI,
   SALT: process.env.SALT,
+
   ACCESS_SECRET_KEY: process.env.ACCESS_SECRET_KEY,
   REFRESH_SECRET_KEY: process.env.REFRESH_SECRET_KEY,
+
   ADMIN_USERNAME:process.env.ADMIN_USERNAME,
   ADMIN_PASSWORD:process.env.ADMIN_PASSWORD,
   ADMIN_EMAIL:process.env.ADMIN_EMAIL,
+
+  GOOGLE_CLIENT_ID : process.env.GOOGLE_CLIENT_ID,
+  GOOGLE_CLIENT_SECRET : process.env.GOOGLE_CLIENT_SECRET,
 });

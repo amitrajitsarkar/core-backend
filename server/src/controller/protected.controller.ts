@@ -10,8 +10,8 @@ class Protected{
         res.status(200).json(
          new ApiResponse(200,"Successfully authenticated",data,true)
         )
-       
-    }
+    
+    } 
 
     refreshController =  async(req:Request,res:Response) =>{
         try{

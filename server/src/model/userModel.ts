@@ -1,25 +1,41 @@
 import mongoose from "mongoose";
-import { email } from "zod";
+
 
 const { Schema } = mongoose;
 
 const UserSchema = new Schema({
       username: {
         type: String,
-        required: true,
+        required: false, // for the OAuth users
         unique:true,
+        sparse:true,
+      },
+      name:{
+        type:String,
+        unique:false
       },
       email: {
         type: String,
         required: true,
         unique:true,
+        sparse:true
       },
       password: {
         type: String,
-        required: true,
+        required: false, // for the OAuth users
+      },
+      provider:{
+        type:String,
+        enum:["google" , "github" , null], // null fot the OAuth users
+        default:null,
+      },
+      providerId:{
+        type:String,
+        default:null ,
       },
       createdAt: {
         type: Date,
+        default:Date.now,
       },
       role: {
         type: String,
@@ -35,4 +51,5 @@ const UserSchema = new Schema({
 });
 
 UserSchema.index({ createdAt: -1 });
+UserSchema.index({ provider: 1, providerId: 1 }, { unique: true, sparse: true });
 export const userModel = mongoose.model("user", UserSchema);
