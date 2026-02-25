@@ -9,9 +9,11 @@ import { token } from "morgan";
 import CreateToken from "../utils/createToken";
 import crypto from "node:crypto";
 import { refresh_tokenModel } from "../model/refresh_token";
+import TokenRepo from "../repository/toke.repository";
 
 
 class AuthService {
+  private tokenRepo = new TokenRepo();
   private createToken = new CreateToken();
   async signup(data: CreateUserInputType) {
     if (await userModel.exists({ username: data.username })) {
@@ -47,14 +49,15 @@ class AuthService {
     if (!User) throw new customErrors.NotFoundError();
     
     const hashedPassword = User.password;
-    const user = await bcrypt.compare(data.password, hashedPassword);
-    if (!user) throw new customErrors.WrongCredential();
+    if(!hashedPassword) throw new customErrors.BadRequestError("Not a general user may be logged in by OAuth service")
+    const isPasswordValid = await bcrypt.compare(data.password, hashedPassword);
+    if (!isPasswordValid) throw new customErrors.WrongCredential("Invalid credentials");
     
 
     const accessToken = this.createToken.createAccessToken(User);
     const refreshToken = this.createToken.createRefreshToken(User);
 
-    await this.storeRefreshToken(User,refreshToken) ;
+    await this.tokenRepo.storeRefreshToken(User,refreshToken);
 
     return {
       username: User.username,
@@ -64,21 +67,7 @@ class AuthService {
     };
   }
 
-  private async storeRefreshToken(User : UserTypes , refreshToken:string){
-    const REFRESH_TTL_MS = 7 * 24 * 60 * 60 * 1000;
-    const expiresin  = Date.now() + REFRESH_TTL_MS ;
-    const hashdRefreshToken = crypto.createHash("sha256").update(refreshToken).digest("hex");
-    const refreshTokenExists = await refresh_tokenModel.findOne({userId:User._id});
-    if(refreshTokenExists){
-      await refresh_tokenModel.deleteOne({userId:User._id});
-    }
-    await refresh_tokenModel.create({
-      userId:User._id,
-      createdAt : Date.now() ,
-      expiresAt : new Date(expiresin),
-      refresh_token : hashdRefreshToken
-    })
-  }
+  
 
   private sendAccessToken(){
     // create the tokern sending via cookie

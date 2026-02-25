@@ -6,6 +6,7 @@ import morgan from "morgan";
 import cookieParser from "cookie-parser";
 
 import { connectDb } from "./config/dbconnection";
+import passport from "passport";
 
 import errorHandler from "./middleware/errorHandler.middlewares";
 
@@ -22,6 +23,7 @@ app.use(cors());
 app.use(express.json());
 app.use(morgan("dev"));
 app.use(cookieParser());
+// app.use(passport.initialize());
 
 app.get("/", (_, res) => {
   res.json({ message: "Server is running" });
@@ -32,6 +34,7 @@ app.use(loginRouter);
 app.use(deleteUserRouter);
 app.use(protectedRoutes);
 app.use("/admin",promote);
+
 
 
 const bootstrap = async (): Promise<void> => {

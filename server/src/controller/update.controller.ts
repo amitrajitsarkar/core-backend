@@ -35,9 +35,10 @@ export class UpdateController {
         }
 
         const userPublic : Pick<typeof user, 'username' | 'email' | 'role'> = {
-          username : user.username,
-          email :user.email,
-          role:user.role
+          role:user.role,
+          ...(user.username != undefined ? {username : user.username} : {}), // null is neede for db thats why
+          ...(user.email != undefined ? {email : user.email} : {})
+          
         }
 
 
