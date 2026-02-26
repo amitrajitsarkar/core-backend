@@ -40,3 +40,5 @@ passport.use(
             
     )
 )
+
+export default passport;

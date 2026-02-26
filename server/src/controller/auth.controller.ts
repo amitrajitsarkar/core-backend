@@ -30,8 +30,8 @@ class AuthController {
       sameSite:'strict' ,
       maxAge: 7*24*60*60*1000,
     })  
-
-    req.role = user.role ;
+    if(req.user)
+    req.user.role = user.role;
 
 
     res.status(200).json(
