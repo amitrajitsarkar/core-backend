@@ -14,6 +14,7 @@ class TokenRepo {
 
     await refresh_tokenModel.create({
       userId:User._id,
+      username:User.username ?? null, 
       createdAt : Date.now() ,
       expiresAt : new Date(expiresin),
       refresh_token : hashdRefreshToken

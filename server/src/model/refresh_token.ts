@@ -5,6 +5,7 @@ const {Schema} = mongoose;
 
 const tokenSchema = new Schema({
     userId:mongoose.Schema.Types.ObjectId,
+    username:String,
     refresh_token:String,
     createdAt:Date,
     expiresAt:Date

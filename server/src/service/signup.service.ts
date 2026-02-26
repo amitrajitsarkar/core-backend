@@ -3,13 +3,12 @@ import bcrypt from "bcrypt";
 import { userModel } from "../model/userModel";
 import type { CreateUserInputType } from "../schema/user.schema";
 import type { loginSchemaType } from "../schema/login.schema";
-import type { UserTypes } from "../@types/UserFromDb";
+
 import * as customErrors from "../utils/specificErrors"; // import as namespace
 import { token } from "morgan";
 import CreateToken from "../utils/createToken";
-import crypto from "node:crypto";
-import { refresh_tokenModel } from "../model/refresh_token";
-import TokenRepo from "../repository/toke.repository";
+
+import TokenRepo from "../repository/token.repository";
 
 
 class AuthService {
