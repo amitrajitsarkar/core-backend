@@ -12,4 +12,13 @@ export interface UserTypes  {
     refreshToken?: string | null;
     expiresIn?: Date | null;
     createdAt?: Date;
-    }
+}
+
+export type CreateUserInput = Pick<UserTypes , 
+    "email" | "username" | "name" | "password" | "provider" | "providerId"
+>;
+
+
+export type UserWithoutSensitive  = Omit<UserTypes , 
+    "password" | "provider" | "providerId" | "refreshToken"
+>;

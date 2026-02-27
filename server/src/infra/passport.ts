@@ -6,6 +6,7 @@ import { userModel } from "../model/userModel";
 import { env } from "../config/env";
 import { Profile  } from "passport";
 import type { VerifyCallback } from "passport-google-oauth20";
+import { RequestUser } from "../@types/requestUser";
 
 passport.use(
     new GoogleStrategy(
@@ -17,23 +18,34 @@ passport.use(
         async (accessToken:string , refreshToken:string ,profile:Profile ,done:VerifyCallback) =>{
             try{
                 // finding the user is any by goofle as provider
-                let user = await userModel.findOne({
+                const existingUser = await userModel.findOne({
                     provider:"google",
                     providerId : profile.id
                 }) ;
                 // not found --> create one in the db
 
                 const email = profile.emails?.[0]?.value;
-                if(!user){
-                    user = await userModel.create({
+        
+                    const user = existingUser ??
+                    (await userModel.create({
                         provider: "google",
                         providerId:profile.id,
                         name:profile.displayName,
                         ...(email ? {email} : {}) // this is used to satisfy the type email in ORM
-                    });
+                    })) ;
+
+                    
+                    const requestuser : RequestUser = {
+                         id: user._id.toString(),
+                        role: user.role,
+                        ...(user.username ? {username : user.username} : {}),
+                        ...(user.email ? {email : user.email} : {})
+                    }
+
+                    return done(null,requestuser);  
                 }
-                return done(null,user);
-            }catch(err){
+                
+            catch(err){
                 return done(err,false);
             }
         }
