@@ -37,7 +37,7 @@ app.use(loginRouter);
 app.use(deleteUserRouter);
 app.use(protectedRoutes);
 app.use("/admin",promote);
-app.use("/v1/OAuth2",OAuthGoogleRouter);
+app.use(OAuthGoogleRouter);
 
 
 
