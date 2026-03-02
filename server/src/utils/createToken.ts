@@ -2,10 +2,11 @@ import { env } from "../config/env";
 import { UserTypes } from "../@types/UserFromDb";
 import jwt from "jsonwebtoken";
 
+import { TokenPayload } from "../@types/tokenPayload";
 
 class CreateToken {
-
-    createAccessToken  = function signAccessToken(User:UserTypes){
+// it takes role and id
+    createAccessToken  = function signAccessToken(User:TokenPayload){
         const ACCESS_SECRET_KEY : string = env.ACCESS_SECRET_KEY;
         const accessToken = jwt.sign(
             { id : User._id,
@@ -16,7 +17,8 @@ class CreateToken {
             );
         return accessToken;
         }
-    createRefreshToken = function signRefreshToken(User:UserTypes){
+        
+    createRefreshToken = function signRefreshToken(User:TokenPayload){
         const REFRESH_SECRET_KEY : string = env.REFRESH_SECRET_KEY;
         const refreshToken = jwt.sign(
               {

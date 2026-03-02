@@ -3,6 +3,7 @@ import bcrypt from "bcrypt";
 import { userModel } from "../model/userModel";
 import type { CreateUserInputType } from "../schema/user.schema";
 import type { loginSchemaType } from "../schema/login.schema";
+import type { RepoObject } from "../repository/token.repository";
 
 import * as customErrors from "../utils/specificErrors"; // import as namespace
 import { token } from "morgan";
@@ -53,10 +54,15 @@ class AuthService {
     if (!isPasswordValid) throw new customErrors.WrongCredential("Invalid credentials");
     
 
-    const accessToken = this.createToken.createAccessToken(User);
-    const refreshToken = this.createToken.createRefreshToken(User);
+    const accessToken = this.createToken.createAccessToken({_id : User._id.toString() , role: User.role});
+    const refreshToken = this.createToken.createRefreshToken({_id : User._id.toString() , role: User.role});
 
-    await this.tokenRepo.storeRefreshToken(User,refreshToken);
+    await this.tokenRepo.storeRefreshToken(
+      {
+        id:User.id ,
+       ...(User.username ? {username : User.username} : {})
+      } as RepoObject,
+      refreshToken);
 
     return {
       username: User.username,

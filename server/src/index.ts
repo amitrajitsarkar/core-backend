@@ -6,6 +6,8 @@ import morgan from "morgan";
 import cookieParser from "cookie-parser";
 
 import { connectDb } from "./config/dbconnection";
+
+import "./infra/passport"
 import passport from "passport";
 
 import errorHandler from "./middleware/errorHandler.middlewares";
@@ -15,6 +17,7 @@ import loginRouter from "./routes/login.routes";
 import deleteUserRouter from "./routes/deleteUser.routes";
 import protectedRoutes from "./routes/protected.routes";
 import promote from "./routes/promote.routes";
+import OAuthGoogleRouter from "./routes/OAuth.routes";
 
 const app = express();
 const PORT = env.PORT;
@@ -23,9 +26,9 @@ app.use(cors());
 app.use(express.json());
 app.use(morgan("dev"));
 app.use(cookieParser());
-// app.use(passport.initialize());
+app.use(passport.initialize());
 
-app.get("/", (_, res) => {
+app.get("/health", (_, res) => {
   res.json({ message: "Server is running" });
 });
 
@@ -34,6 +37,7 @@ app.use(loginRouter);
 app.use(deleteUserRouter);
 app.use(protectedRoutes);
 app.use("/admin",promote);
+app.use("/v1/OAuth2",OAuthGoogleRouter);
 
 
 

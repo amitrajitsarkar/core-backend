@@ -13,7 +13,7 @@ passport.use(
         {
             clientID: env.GOOGLE_CLIENT_ID,
             clientSecret : env.GOOGLE_CLIENT_SECRET,
-            callbackURL : "/auth/google/callback",
+            callbackURL : "/v1/OAuth2/auth/google/callback",
         },
         async (accessToken:string , refreshToken:string ,profile:Profile ,done:VerifyCallback) =>{
             try{
@@ -34,7 +34,6 @@ passport.use(
                         ...(email ? {email} : {}) // this is used to satisfy the type email in ORM
                     })) ;
 
-                    
                     const requestuser : RequestUser = {
                          id: user._id.toString(),
                         role: user.role,

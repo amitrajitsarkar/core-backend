@@ -12,7 +12,7 @@ class protectedService{
     refresh = async(refreshToken:string) =>{
         if(!refreshToken){
             throw new E.UnauthorizedError();
-        }
+        }  
         try{
             const decoded = jwt.verify(refreshToken,env.REFRESH_SECRET_KEY) ;
             const hashedToken = crypto.createHash('sha256').update(refreshToken).digest('hex');
