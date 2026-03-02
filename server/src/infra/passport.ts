@@ -1,7 +1,9 @@
 // can also be in the config area
 
 import passport from "passport";
-import { Strategy as GoogleStrategy} from "passport-google-oauth20";
+import {Strategy as GoogleStrategy} from "passport-google-oauth20";
+import {Strategy as GithubStrategy} from "passport-github2"
+
 import { userModel } from "../model/userModel";
 import { env } from "../config/env";
 import { Profile  } from "passport";
@@ -52,4 +54,8 @@ passport.use(
     )
 )
 
+
+passport.use(
+
+)
 export default passport;
