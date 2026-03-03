@@ -2,13 +2,13 @@ import { Router } from "express";
 
 const router = Router();
 
-import signupRouter from "./signup.routes";
-import loginRouter from "./login.routes";
+import signupRouter from "./signup.route";
+import loginRouter from "./login.route";
 import deleteUserRouter from "./deleteUser.route";
-import protectedRoutes from "./protected.routes";
-import promote from "./promote.routes";
-import OAuthGoogleRouter from "./OAuth-Google.routes";
-import OAuthGithubRoute from "./OAuth-Github.routes";
+import protectedRoutes from "./protected.route";
+import promote from "./promote.route";
+import OAuthGoogleRouter from "./OAuth-Google.route";
+import OAuthGithubRoute from "./OAuth-Github.route";
 import availableUserRouter from "./availableUsers.route";
 
 
@@ -27,6 +27,6 @@ router.use("/api/v1/admin", promote);               // /api/v1/admin/promote/:id
 router.use(OAuthGoogleRouter);                       // /auth/google, /auth/google/callback
 router.use(OAuthGithubRoute);                        // /auth/github, /auth/github/callback
 
-router.use("/api/v1", availableUserRouter);           // /api/v1/admin/userdata
+router.use("/api/v1", availableUserRouter);           // /api/v1/admin/userdata  api/v1/moderator/userdata
 
 export default router ;

@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { UpdateController } from "../controller/update.controller";
-import validateAdmin from "../middleware/validateRole.middleware"
+import validateAdmin from "../middleware/validateAdmin.middleware"
 import validatebyZod from "../middleware/validate.middleware";
 import setReqHeader from "../middleware/setReqHeader";
 

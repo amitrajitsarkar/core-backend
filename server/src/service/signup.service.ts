@@ -16,7 +16,8 @@ class AuthService {
   private tokenRepo = new TokenRepo();
   private createToken = new CreateToken();
   async signup(data: CreateUserInputType) {
-    if (await userModel.exists({ username: data.username })) {
+    const username = data.username.toLocaleLowerCase();
+    if (await userModel.exists({ username: username })) {
       throw new customErrors.conflictError();
     }
 
@@ -29,7 +30,7 @@ class AuthService {
     const hashed = await bcrypt.hash(data.password, SALT);
 
     const user = await userModel.create({
-      username: data.username,
+      username: username,
       password: hashed,
       email:data.email,
       createdAt: Date.now(),
@@ -44,8 +45,9 @@ class AuthService {
 
   async login(data: loginSchemaType) {
     
+    const username = data.username.toLocaleLowerCase();
 
-    const User = await userModel.findOne({ username: data.username });
+    const User = await userModel.findOne({ username });
     if (!User) throw new customErrors.NotFoundError();
     
     const hashedPassword = User.password;
