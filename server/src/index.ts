@@ -12,13 +12,8 @@ import passport from "passport";
 
 import errorHandler from "./middleware/errorHandler.middlewares";
 
-import signupRouter from "./routes/signup.routes";
-import loginRouter from "./routes/login.routes";
-import deleteUserRouter from "./routes/deleteUser.routes";
-import protectedRoutes from "./routes/protected.routes";
-import promote from "./routes/promote.routes";
-import OAuthGoogleRouter from "./routes/OAuth-Google.routes";
-import OAuthGithubRoute from "./routes/OAuth-Github.routes";
+import router from "./routes/index.route";
+
 
 const app = express();
 const PORT = env.PORT;
@@ -33,15 +28,8 @@ app.get("/health", (_, res) => {
   res.json({ message: "Server is running" });
 });
 
-app.use(signupRouter);
-app.use(loginRouter);
-app.use(deleteUserRouter);
-app.use(protectedRoutes);
-app.use("/admin",promote);
-app.use(OAuthGoogleRouter);
-app.use(OAuthGithubRoute);
 
-
+app.use(router);
 
 const bootstrap = async (): Promise<void> => {
   try {
