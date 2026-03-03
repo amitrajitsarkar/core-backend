@@ -17,7 +17,8 @@ import loginRouter from "./routes/login.routes";
 import deleteUserRouter from "./routes/deleteUser.routes";
 import protectedRoutes from "./routes/protected.routes";
 import promote from "./routes/promote.routes";
-import OAuthGoogleRouter from "./routes/OAuth.routes";
+import OAuthGoogleRouter from "./routes/OAuth-Google.routes";
+import OAuthGithubRoute from "./routes/OAuth-Github.routes";
 
 const app = express();
 const PORT = env.PORT;
@@ -38,6 +39,7 @@ app.use(deleteUserRouter);
 app.use(protectedRoutes);
 app.use("/admin",promote);
 app.use(OAuthGoogleRouter);
+app.use(OAuthGithubRoute);
 
 
 
