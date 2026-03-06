@@ -7,7 +7,6 @@ const UserSchema = new Schema({
       username: {
         type: String,
         required: false, // for the OAuth users
-        unique:true,
         sparse:true,
       },
       name:{
@@ -16,7 +15,6 @@ const UserSchema = new Schema({
       },
       email: {
         type: String,
-   
         unique:true,
         sparse:true
       },

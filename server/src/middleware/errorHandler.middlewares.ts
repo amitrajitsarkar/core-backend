@@ -13,10 +13,6 @@ const errorHandler = (err:any , req:Request, res:Response ,next : NextFunction)=
         return res.status(err.statusCode).json(
             new ApiResponse(err.statusCode,err.message,null,false)
     );
-    }else if(err.code === 11000){    //  for the duplicate mongo error
-        return res.status(409).json(
-            new ApiResponse(409,"Email already exists",null,false)
-        )
     }else if(err instanceof Error){
         return res.status(500).json(
             new ApiResponse(500,err.message,null,false)
@@ -30,3 +26,10 @@ const errorHandler = (err:any , req:Request, res:Response ,next : NextFunction)=
 }
 
 export default errorHandler ;
+
+
+// else if(err.code === 11000){    //  for the duplicate mongo error
+//         return res.status(409).json(
+//             new ApiResponse(409,"Email already exists",null,false)
+//         )
+//     }

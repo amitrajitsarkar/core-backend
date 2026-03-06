@@ -2,8 +2,9 @@ import { Router } from 'express';
 
 import jwtHandler from '../middleware/jwtHandler.middleware'; // add the user in the request
 import validateAdmin from '../middleware/validateAdmin.middleware'; // validating the admin role
-import validateModerator from '../middleware/validateModerator.middleware';
+import validateModerator from '../middleware/validateModerator.middleware'; // validates the moderators and admin
 import ShowData from '../controller/protectedData.controller';
+
 const availableUserRouter = Router();
 const showData = new ShowData();
 
@@ -13,6 +14,7 @@ availableUserRouter.get(
     validateAdmin,
     showData.showUsersToAdmin,
 );
+
 
 availableUserRouter.get(
     '/moderator/userdata',
