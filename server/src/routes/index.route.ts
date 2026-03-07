@@ -10,6 +10,7 @@ import promote from "./promote.route";
 import OAuthGoogleRouter from "./OAuth-Google.route";
 import OAuthGithubRoute from "./OAuth-Github.route";
 import availableUserRouter from "./availableUsers.route";
+import emailRouter from "./emailHeath.route";
 
 
 
@@ -28,5 +29,8 @@ router.use(OAuthGoogleRouter);                       // /auth/google, /auth/goog
 router.use(OAuthGithubRoute);                        // /auth/github, /auth/github/callback
 
 router.use("/api/v1", availableUserRouter);           // /api/v1/admin/userdata  api/v1/moderator/userdata
+
+router.use("/api/v1/user", emailRouter);             // api/v1/user/email/health -- for testing the email(gmail) service
+
 
 export default router ;

@@ -1,4 +1,5 @@
 import "dotenv/config";
+import { CLIENT_RENEG_LIMIT } from "node:tls";
 import { z } from "zod";
 const envSchema = z
   .object({
@@ -37,7 +38,12 @@ const envSchema = z
     GOOGLE_CLIENT_ID:z.string(),
     GOOGLE_CLIENT_SECRET:z.string(),
     GITHUB_CLIENT_ID:z.string(),
-    GITHUB_CLIENT_SECRET:z.string()
+    GITHUB_CLIENT_SECRET:z.string(),
+
+    EMAIL_USER : z.email(),
+    EMAIL_PASS : z.string().length(16),
+    CLIENT_URL: z.url(),
+
   })
   .strict();
 
@@ -60,4 +66,8 @@ export const env = envSchema.parse({
 
   GITHUB_CLIENT_ID : process.env.GITHUB_CLIENT_ID,
   GITHUB_CLIENT_SECRET : process.env.GITHUB_CLIENT_SECRET,
+
+  EMAIL_USER : process.env.EMAIL_USER,
+  EMAIL_PASS : process.env.EMAIL_PASS,
+  CLIENT_URL : process.env.CLIENT_URL,
 });
