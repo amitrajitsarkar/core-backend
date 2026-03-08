@@ -54,3 +54,10 @@ export class WrongCredential extends AppError {
         super(message,401) ; 
     }
 }
+
+
+export class emailError extends AppError {
+    constructor(message:string = "Failed to send email"){
+        super(message,500) ; 
+    }
+}

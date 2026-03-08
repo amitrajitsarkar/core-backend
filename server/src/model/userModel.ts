@@ -1,4 +1,6 @@
 import mongoose from "mongoose";
+import { date, string } from "zod";
+import { required } from "zod/v4/core/util.cjs";
 
 
 const { Schema } = mongoose;
@@ -8,6 +10,14 @@ const UserSchema = new Schema({
         type: String,
         required: false, // for the OAuth users
         sparse:true,
+      },
+      resetToken:{
+        type:string,
+        required : false
+      },
+      resetTokenExpiry :{
+        type:Date,
+        required : false
       },
       name:{
         type:String,

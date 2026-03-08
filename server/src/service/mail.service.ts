@@ -1,18 +1,34 @@
 import { env } from "../config/env";
 import { userModel } from "../model/userModel";
 import * as emailFucntion from "../config/email.config";
-import * as customErrors from "../utils/specificErrors"; // import as namespace
+import * as E from "../utils/specificErrors"; // import as namespace
+
+import getresetLinkData from "../utils/resetUrl";
 
 interface mailHealthData {
-    clientMial : string
+    clientMail : string
 }
 
 class MailService {
     public mailHealthService = async(data : mailHealthData)=>{ // data is req.body
-        const {clientMial} = data;
-        const info = await emailFucntion.sendTestEmail(clientMial)
-
+        const {clientMail} = data;
+        const info = await emailFucntion.sendTestEmail(clientMail)
         return info?.messageId ;
+    }
+
+
+    public recoveryMailService = async(data : mailHealthData)=>{ // data is req.body
+        const {clientMail} = data;
+        const existMail = userModel.exists({email:clientMail}); 
+        if(!existMail){
+            throw new E.BadRequestError("user don't exists !")
+        }
+        
+        const linkData = getresetLinkData();
+        //TODO: have to save the hashedtoken and the expiry in the correct db model
+
+        const infoMsgId = await emailFucntion.sendResetEmail(clientMail,linkData.resetUrl);
+        return infoMsgId ;
     }
 }
 
