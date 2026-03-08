@@ -4,4 +4,4 @@ node_modules
 update/
 .prettierrc
 .prettierignore
-server/src/utils/templates/
+server/src/utils/templates/secret.html

@@ -45,7 +45,7 @@ async function sendOTPEmail(toEmail:string, otp:string) {
 async function sendTestEmail(toEmail:string) {
     try{
         const templete = fs.readFileSync(
-        path.join(__dirname,"../utils/templates/secret.html"),
+        path.join(__dirname,"../utils/templates/testing.html"),
         "utf-8"
     )
 
@@ -56,7 +56,7 @@ async function sendTestEmail(toEmail:string) {
         from: '"Core-Backend" <backend.system.service@gmail.com>',
         to: toEmail,
         subject: 'Something .....',
-        html:`<h1>This is for testing purpose</h1>`
+        html:templete,
     });
     console.log("Accepted:", info.accepted);
     console.log("Rejected:", info.rejected);
