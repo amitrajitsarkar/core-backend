@@ -7,5 +7,7 @@ const emailRouter = Router();
 
 // this is for the testing purpose .
 emailRouter.post("/email/health" , emailController.emailHealth);
+// resset password
+// emailRouter.post("/email/password/recovery")
 
 export default emailRouter ;

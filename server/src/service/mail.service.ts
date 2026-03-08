@@ -12,7 +12,7 @@ class MailService {
         const {clientMial} = data;
         const info = await emailFucntion.sendTestEmail(clientMial)
 
-        return info.response ;
+        return info?.messageId ;
     }
 }
 

@@ -14,7 +14,7 @@ const transporter = nodemailer.createTransport({
 // Password Reset
 async function sendResetEmail(toEmail:string, resetUrl:string) {
   await transporter.sendMail({
-    from: '"Core-Backend" <amitrajitsarkar4@gmail.com>',
+    from: '"Core-Backend" <backend.system.service@gmail.com>',
     to: toEmail,
     subject: 'Password Reset Request',
     html: `<a href="${resetUrl}">Reset Password</a>`,
@@ -24,7 +24,7 @@ async function sendResetEmail(toEmail:string, resetUrl:string) {
 // Welcome Email
 async function sendWelcomeEmail(toEmail:string, username:string) {
   await transporter.sendMail({
-    from: '"Core-Backend" <amitrajitsarkar4@gmail.com>',
+    from: '"Core-Backend" <backend.system.service@gmail.com>',
     to: toEmail,
     subject: 'Welcome to Core-Backend!',
     html: `<h2>Welcome ${username}!</h2>`,
@@ -34,7 +34,7 @@ async function sendWelcomeEmail(toEmail:string, username:string) {
 // OTP Verification
 async function sendOTPEmail(toEmail:string, otp:string) {
   await transporter.sendMail({
-    from: '"Core-Backend" <amitrajitsarkar4@gmail.com>',
+    from: '"Core-Backend" <backend.system.service@gmail.com>',
     to: toEmail,
     subject: 'Your OTP Code',
     html: `<h2>Your OTP is: <strong>${otp}</strong></h2>`,
@@ -43,18 +43,32 @@ async function sendOTPEmail(toEmail:string, otp:string) {
 
 // Test Email - mail health route is using it 
 async function sendTestEmail(toEmail:string) {
-const templete = fs.readFileSync(
-  path.join(__dirname,"../utils/templates/secret.html"),
-  "utf-8"
-)
+    try{
+        const templete = fs.readFileSync(
+        path.join(__dirname,"../utils/templates/secret.html"),
+        "utf-8"
+    )
 
-  const info = await transporter.sendMail({
-    from: '"Core-Backend" <amitrajitsarkar4@gmail.com>',
-    to: toEmail,
-    subject: 'Something .....',
-    html:templete,
-  });
-  return info ;
+    await transporter.verify();
+    console.log("✅ Transporter ready");
+
+    const info = await transporter.sendMail({
+        from: '"Core-Backend" <backend.system.service@gmail.com>',
+        to: toEmail,
+        subject: 'Something .....',
+        html:`<h1>This is for testing purpose</h1>`
+    });
+    console.log("Accepted:", info.accepted);
+    console.log("Rejected:", info.rejected);
+    console.log("Response:", info.response);
+    console.log("MessageId:", info.messageId);
+
+    console.log("To : " ,toEmail)
+    return info ;
+    }catch(err){
+        if(err instanceof Error)
+        console.error("❌ Transporter error:", err.message);
+    }
 }
 
 export { 
