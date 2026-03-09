@@ -1,6 +1,5 @@
 import mongoose from "mongoose";
-import { date, string } from "zod";
-import { required } from "zod/v4/core/util.cjs";
+
 
 
 const { Schema } = mongoose;
@@ -12,7 +11,7 @@ const UserSchema = new Schema({
         sparse:true,
       },
       resetToken:{
-        type:string,
+        type:String,
         required : false
       },
       resetTokenExpiry :{
@@ -34,12 +33,13 @@ const UserSchema = new Schema({
       },
       provider:{
         type:String,
-        enum:["google" , "github" , null], // null fot the OAuth users
+        enum:["google" , "github" , null], // null fot the local users
         default:null,
       },
       providerId:{
         type:String,
         default:null ,
+        
       },
       createdAt: {
         type: Date,

@@ -4,6 +4,7 @@ import { userModel } from "../model/userModel";
 import type { CreateUserInputType } from "../schema/user.schema";
 import type { loginSchemaType } from "../schema/login.schema";
 import type { RepoObject } from "../repository/token.repository";
+import * as mailService from "../config/email.config"
 
 import * as customErrors from "../utils/specificErrors"; // import as namespace
 import { token } from "morgan";
@@ -17,10 +18,11 @@ class AuthService {
   private createToken = new CreateToken();
   async signup(data: CreateUserInputType) {
     const username = data.username.toLocaleLowerCase();
+    const showUsername = data.username[0]?.toUpperCase() + data.username.slice(1);
     if (await userModel.exists({ username: username })) {
       throw new customErrors.conflictError();
     }
-
+    
     const SALT: number = env.SALT;
       
     if (!SALT) {
@@ -28,6 +30,10 @@ class AuthService {
     }
 
     const hashed = await bcrypt.hash(data.password, SALT);
+
+    //* sendig the mail
+    await mailService.sendWelcomeEmail(data.email,showUsername,env.CLIENT_URL);
+
 
     const user = await userModel.create({
       username: username,
