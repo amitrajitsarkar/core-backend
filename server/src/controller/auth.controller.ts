@@ -1,6 +1,7 @@
 import AuthService from "../service/signup.service";
-import {Request,Response} from "express";
+import {NextFunction, Request,Response} from "express";
 import ApiResponse from "../utils/ApiResponse";
+import * as E from "../utils/specificErrors"
 
 class AuthController {
   private authlogic = new AuthService();
@@ -42,6 +43,33 @@ class AuthController {
     );
   }
   
+  resetPassword = async(req:Request , res:Response,next:NextFunction)=>{
+    try{
+      const {newPassword,repeatNewPassword} = req.body ;
+      // const token = req.query.token as unknown as string;
+      const token = String(req.query.token);
+
+      if(!newPassword || !token){
+        throw new E.BadRequestError();
+      }
+      console.log(newPassword);
+      console.log(token);
+
+      const x = await this.authlogic.resetPasswordService({token , newPassword , repeatNewPassword});
+      res.status(200).json(
+        new ApiResponse(
+          200,
+          "password changed seccessfully",
+          {
+            "username" : x
+          },
+          true
+        )
+      )
+    }catch(err){
+      next(err);
+    }
+  }
 }
 
 export default AuthController ;

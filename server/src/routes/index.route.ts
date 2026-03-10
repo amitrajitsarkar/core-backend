@@ -10,10 +10,13 @@ import promote from "./promote.route";
 import OAuthGoogleRouter from "./OAuth-Google.route";
 import OAuthGithubRoute from "./OAuth-Github.route";
 import availableUserRouter from "./availableUsers.route";
-import emailRouter from "./emailHeath.route";
+import emailRouter from "./email.route";
+import resetPasswordRouter from "./reset-password.route";
+import testRouter from "./TEST.route";
 
 
-
+// ! testing route
+router.use(testRouter); // mimicking the FE
 
 // Everything else grouped
 router.use("/api/v1/auth", signupRouter);           // /api/v1/auth/signup, 
@@ -32,6 +35,6 @@ router.use("/api/v1", availableUserRouter);           // /api/v1/admin/userdata 
 
 router.use("/api/v1/user", emailRouter);             // api/v1/user/email/health -- for testing the email(gmail) service
                                                      // api/v1/user/email/forgot-password
-
+router.use("/api/v1/user", resetPasswordRouter)
 
 export default router ;

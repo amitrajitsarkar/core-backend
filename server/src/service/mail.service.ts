@@ -33,7 +33,7 @@ class MailService {
         const expTime = linkData.resetTokenExpiry;
 
         const filter = { email: clientMail };
-        const update = { 
+        const update = {
             resetToken : hashedtoken,
             resetTokenExpiry : expTime,
         };

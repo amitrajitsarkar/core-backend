@@ -7,7 +7,7 @@ const getresetLinkData = () => {
     // token = "a1b2c3d4e5f6..." (64 random characters)
 
     // 3. Build the link using the RAW token
-    const resetUrl = `${env.CLIENT_URL}/reset-password?token=${token}`;
+    const resetUrl = `${env.CLIENT_URL}/api/v1/user/reset-password?token=${token}`;
 
     const hashedResetToken = crypto
         .createHash('sha256')

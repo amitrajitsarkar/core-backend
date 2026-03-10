@@ -61,3 +61,17 @@ export class emailError extends AppError {
         super(message,500) ; 
     }
 }
+
+export class urlExpiredError extends AppError {
+    constructor(message:string = "Reset password url is expired"){
+        super(message,410) ; // 410 --> Gone
+    }
+}
+
+export class PasswordMismatchError  extends AppError {
+    constructor(message:string = "Passwords do not match"){
+        super(message,400) ; 
+    }
+}
+
+
