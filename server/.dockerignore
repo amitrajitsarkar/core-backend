@@ -1,0 +1,23 @@
+node_modules
+dist
+.env
+.git
+.prettierrc
+.prettierignore
+prettier.config.js
+
+# Logs
+logs/
+*.log
+
+
+# Editor & OS
+.vscode/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+
+.eslintrc.json
+.eslintignore

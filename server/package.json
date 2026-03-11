@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon --exec ts-node src/index.ts",
-    "biuld": "tsc",
+    "build": "tsc",
     "start": "node dist/index.js",
     "set:admin": "ts-node src/seeders/admin-creator.ts"
   },
