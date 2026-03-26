@@ -74,6 +74,3 @@ export const env = envSchema.parse({
 
   LOG_LEVEL : process.env.LOG_LEVEL
 });
-
-
-console.log("MONGO_URI loaded:", env.MONGO_URI); // temp debug

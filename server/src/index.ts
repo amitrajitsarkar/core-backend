@@ -1,9 +1,8 @@
 import { env } from "./config/env";
-// import pinoHttp from "pino-http";
-// import {logger}  from "./utils/logger";
+import pinoHttp from "pino-http";
+import {logger}  from "./utils/logger";
 import express from "express";
 import cors from "cors";
-import morgan from "morgan";
 import cookieParser from "cookie-parser";
 
 import { connectDb } from "./config/dbconnection";
@@ -17,13 +16,13 @@ import router from "./routes/index.route";
 
 const app = express();
 const PORT = env.PORT;
-// const httpLogger = pinoHttp({logger});
+const httpLogger = pinoHttp({logger});
 
 app.use(cors());
 app.use(express.json());
-app.use(morgan("dev"));
 app.use(cookieParser());
 app.use(passport.initialize());
+app.use(httpLogger);
 
 
 app.get("/health", (_, res) => {
@@ -38,12 +37,11 @@ const bootstrap = async (): Promise<void> => {
     await connectDb();
 
     app.listen(PORT,"0.0.0.0", () => {
-      // logger.info(`Server running on port ${PORT}`);
-      console.log(`Server running on port ${PORT}`);
+      logger.info(`Server running on port ${PORT}`);
+      
     });
   } catch (err) {
-    // logger.error({err} ,"Error while connecting ");
-    console.log("Error while connecting " ,err);
+    logger.error({err} ,"Error while connecting ");
     process.exit(1);
   }
 };
