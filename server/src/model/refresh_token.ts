@@ -8,7 +8,7 @@ const tokenSchema = new Schema({
     username:String,
     refresh_token:String,
     createdAt:Date,
-    expiresAt:Date
+    expiresAt:Date 
 })
 
  // tokenSchema.index({createdAt:-1}); // no need tho. not gonna access through any Api...

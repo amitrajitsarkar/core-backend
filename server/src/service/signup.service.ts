@@ -35,7 +35,7 @@ class AuthService {
         if (!this.SALT) {
             throw new customErrors.SaltError();
         }
-
+        
         const hashed = await bcrypt.hash(data.password, this.SALT);
 
         //* sendig the mail
@@ -109,8 +109,7 @@ class AuthService {
             throw new customErrors.PasswordMismatchError();
         }
 
-        const hashedToken = crypto
-            .createHash('sha256')
+        const hashedToken = crypto.createHash('sha256')
             .update(token)
             .digest('hex');
 

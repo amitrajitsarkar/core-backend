@@ -1,5 +1,4 @@
 import "dotenv/config";
-import { CLIENT_RENEG_LIMIT } from "node:tls";
 import { z } from "zod";
 const envSchema = z
   .object({
@@ -44,6 +43,8 @@ const envSchema = z
     EMAIL_PASS : z.string().length(16),
     CLIENT_URL: z.url(),
 
+    LOG_LEVEL:z.string()
+
   })
   .strict();
 
@@ -70,4 +71,9 @@ export const env = envSchema.parse({
   EMAIL_USER : process.env.EMAIL_USER,
   EMAIL_PASS : process.env.EMAIL_PASS,
   CLIENT_URL : process.env.CLIENT_URL,
+
+  LOG_LEVEL : process.env.LOG_LEVEL
 });
+
+
+console.log("MONGO_URI loaded:", env.MONGO_URI); // temp debug
