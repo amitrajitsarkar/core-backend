@@ -43,8 +43,9 @@ const envSchema = z
     EMAIL_PASS : z.string().length(16),
     CLIENT_URL: z.url(),
 
-    LOG_LEVEL:z.string()
+    LOG_LEVEL:z.string(),
 
+    REDIS_EXP_SEC : z.coerce.number()
   })
   .strict();
 
@@ -72,5 +73,7 @@ export const env = envSchema.parse({
   EMAIL_PASS : process.env.EMAIL_PASS,
   CLIENT_URL : process.env.CLIENT_URL,
 
-  LOG_LEVEL : process.env.LOG_LEVEL
+  LOG_LEVEL : process.env.LOG_LEVEL,
+
+  REDIS_EXP_SEC : process.env.REDIS_EXP_SEC
 });

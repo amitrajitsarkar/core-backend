@@ -6,6 +6,7 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 
 import { connectDb } from "./config/dbconnection";
+import { connectRedis } from "./config/redisConnection";
 
 import "./infra/passport"
 import passport from "passport";
@@ -35,6 +36,7 @@ app.use(router);
 const bootstrap = async (): Promise<void> => {
   try {
     await connectDb();
+    await connectRedis();
 
     app.listen(PORT,"0.0.0.0", () => {
       logger.info(`Server running on port ${PORT}`);

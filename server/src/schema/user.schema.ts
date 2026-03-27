@@ -3,10 +3,12 @@ import {  z } from "zod";
 export const createUserSchema = z.object({
   username: z.string().min(2),
   email:z
-    .email("Invalid email format")
+    .email("Invalid email format"),
+    /* 
     .regex(/^[a-z0-9._%+-]+@gmail\.com$/, {
-      message: "Only Gmail addresses are allowed",
-    }),
+    message: "Only Gmail addresses are allowed",
+    }) removed this part for testing purposes
+    */
   password: z
     .string()
     .min(6, "Password must be at least 6 characters long")

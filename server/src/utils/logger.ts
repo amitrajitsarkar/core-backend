@@ -11,6 +11,8 @@ export const logger = pino({
   'body.password',          // if using pino-http serializer
   'req.body.token',
   'body.token',
+  'req.headers.cookie',        // redacts the whole cookie header --  the tokens were exposed :--
+  'res.headers["set-cookie"]',
 ],
   base:{
     service: "core-backend", // usefull @ multiple services

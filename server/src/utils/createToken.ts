@@ -13,7 +13,7 @@ class CreateToken {
                 role : User.role? User.role : "user"
             },
             ACCESS_SECRET_KEY,
-            {expiresIn : '15s'}
+            {expiresIn : '1m'}
             );
         return accessToken;
         }
