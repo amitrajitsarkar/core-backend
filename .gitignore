@@ -6,6 +6,7 @@ dist
 .prettierrc
 .prettierignore
 server/src/utils/templates/secret.html
+server/src/utils/templates/trail.mjml
 
 #For the testing purpose
 server/src/routes/TEST.route.ts
@@ -13,3 +14,4 @@ testdir
 
 .eslintrc.json
 .eslintignore
+logs/
