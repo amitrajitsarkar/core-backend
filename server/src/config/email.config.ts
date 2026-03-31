@@ -3,6 +3,7 @@ import { env } from '../config/env';
 import * as E from '../utils/specificErrors';
 import fs from 'node:fs';
 import path from 'node:path';
+import { logger } from '../utils/logger';
 
 const transporter = nodemailer.createTransport({
     service: 'gmail',
@@ -81,7 +82,7 @@ async function sendTestEmail(toEmail: string) {
         );
 
         await transporter.verify();
-        console.log('✅ Transporter ready');
+        logger.info('✅ Transporter ready');
 
         const info = await transporter.sendMail({
             from: '"Core-Backend" <backend.system.service@gmail.com>',
@@ -97,8 +98,8 @@ async function sendTestEmail(toEmail: string) {
         console.log('To : ', toEmail);
         return info;
     } catch (err) {
-        if (err instanceof Error)
-            console.error('❌ Transporter error:', err.message);
+        
+        logger.error({ err},"Transporter error");
     }
 }
 

@@ -13,6 +13,7 @@ import availableUserRouter from "./availableUsers.route";
 import emailRouter from "./email.route";
 import resetPasswordRouter from "./reset-password.route";
 import testRouter from "./TEST.route";
+import logoutRouter from "./logout.route";
 
 
 // ! testing route
@@ -23,6 +24,8 @@ router.use("/api/v1/auth", signupRouter);           // /api/v1/auth/signup,
 router.use("/api/v1/auth", loginRouter);            // /api/v1/auth/login
 
 router.use("/api/v1/user", protectedRoutes);        // /api/v1/user/protected   /api/v1/user/protected/refresh
+
+router.use("/api/v1/user" ,logoutRouter);           // /api/vq/user/logout
 
 router.use("/api/v1/user", deleteUserRouter);       // /api/v1/user/delete
 

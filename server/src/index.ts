@@ -39,9 +39,9 @@ const bootstrap = async (): Promise<void> => {
     await connectRedis();
 
     app.listen(PORT,"0.0.0.0", () => {
-      logger.info(`Server running on port ${PORT}`);
+      logger.info(`Server is running on port ${PORT}`);
       
-    });
+    }); 
   } catch (err) {
     logger.error({err} ,"Error while connecting ");
     process.exit(1);

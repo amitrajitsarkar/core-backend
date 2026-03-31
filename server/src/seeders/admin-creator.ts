@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 import bcrypt from "bcrypt";
 import { env } from "../config/env";
 import { userModel } from "../model/userModel";
+import { logger } from "../utils/logger";
 const MONGO_URI = env.MONGO_URI;
 
 async function seedAdmin() {
@@ -17,7 +18,7 @@ async function seedAdmin() {
 
   const existing = await userModel.findOne({ email });
   if (existing) {
-    console.log("Admin already exists");
+    logger.warn("Admin already exists");
     process.exit(0);
   }
 
@@ -30,7 +31,7 @@ async function seedAdmin() {
     role: "admin"
   });
 
-  console.log("Admin user created");
+  logger.info("Admin user created");
   process.exit(0);
 }
 

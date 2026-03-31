@@ -13,10 +13,10 @@ class CreateToken {
                 role : User.role? User.role : "user"
             },
             ACCESS_SECRET_KEY,
-            {expiresIn : '1m'}
+            {expiresIn : '15m'}
             );
         return accessToken;
-        }
+    }
         
     createRefreshToken = function signRefreshToken(User:TokenPayload){
         const REFRESH_SECRET_KEY : string = env.REFRESH_SECRET_KEY;

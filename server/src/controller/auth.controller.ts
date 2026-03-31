@@ -23,7 +23,7 @@ class AuthController {
       httpOnly:true,
       secure: false, //  only for dev env. 
       sameSite: 'strict' ,
-      maxAge: 15*1000, // should not be this low ~15sec only for testing purpose.
+      maxAge: 15*60*1000, // 15 min
     })  
     res.cookie('refreshToken' , user.refreshToken ,{
       httpOnly:true,
