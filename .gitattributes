@@ -1,0 +1,25 @@
+# Auto normalize line endings
+* text=auto
+
+# Force consistent endings
+*.js text eol=lf
+*.ts text eol=lf
+*.json text eol=lf
+*.css text eol=lf
+*.html text eol=lf
+
+# Windows scripts
+*.bat text eol=crlf
+
+# Binary files -- treating as raw files cause no changes is needed
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.webp binary
+*.ico binary
+*.mp4 binary
+*.mp3 binary
+
+# Lock files 
+package-lock.json merge=ours
