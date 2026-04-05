@@ -9,9 +9,9 @@ interface mailHealthData {
     clientMail: string;
 }
 
-class MailService {
+class MailService{
     public mailHealthService = async (data: mailHealthData) => {
-        // data is req.body
+        // data is req.body 
         const { clientMail } = data;
         const info = await emailFucntion.sendTestEmail(clientMail);
         return info?.messageId;
@@ -27,12 +27,12 @@ class MailService {
         }
         
         const linkData = getresetLinkData();
-        //TODO: have to save the hashedtoken and the expiry in the correct db model
 
         const hashedtoken = linkData.hashedResetToken;
         const expTime = linkData.resetTokenExpiry;
 
         const filter = { email: clientMail };
+
         const update = {
             resetToken : hashedtoken,
             resetTokenExpiry : expTime,
@@ -44,7 +44,6 @@ class MailService {
             rawResult: true, // Return the raw result from the MongoDB driver
         });
         
-
         const infoMsgId = await emailFucntion.sendResetEmail(
             clientMail,
             linkData.resetUrl,

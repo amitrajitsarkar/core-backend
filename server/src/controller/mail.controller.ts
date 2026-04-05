@@ -25,7 +25,7 @@ class EmailController {
             const data = await mailService.recoveryMailService(req.body);
             return res.status(200).json(
                 new ApiResponse<string>(200,
-                    "Email for password recovery is sent successfully",
+                    "If this email exists in our database then an email for password recovery will be sent",
                     `MessageId : ${data}`,
                     true
                 )

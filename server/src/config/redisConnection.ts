@@ -1,8 +1,9 @@
+import {env} from "../config/env"
 import { createClient } from "redis";
 import { logger } from "../utils/logger";
 export const redisClient = createClient({
     socket:{
-        host: "127.0.0.1",
+        host: env.REDIS_HOST || "127.0.0.1",
         port: 6379,
     }
 });

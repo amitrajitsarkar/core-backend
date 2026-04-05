@@ -31,6 +31,7 @@ async function sendResetEmail(toEmail: string, resetUrl: string) {
 
         return info.messageId;
     } catch (err) {
+        
         throw new E.emailError('Failed to send password reset email');
     }
 }
@@ -59,7 +60,9 @@ async function sendWelcomeEmail(
 
         return info.messageId;
     } catch (err) {
-        throw new E.emailError('Failed to send password reset email');
+        logger.error({Error : err} , "Email error");
+        console.log("Email error:", err);
+        throw new E.emailError('Failed to send welcome email');
     }
 }
 
@@ -90,10 +93,10 @@ async function sendTestEmail(toEmail: string) {
             subject: 'Something .....',
             html: tamplate,
         });
-        console.log('Accepted:', info.accepted);
-        console.log('Rejected:', info.rejected);
-        console.log('Response:', info.response);
-        console.log('MessageId:', info.messageId);
+        logger.info({Accepted: info.accepted} , 'Accepted');
+        logger.info({ response: info.response }, 'Response');
+        logger.info({ messageId: info.messageId }, 'MessageId');
+        logger.warn({ rejected: info.rejected }, 'Rejected');
 
         console.log('To : ', toEmail);
         return info;

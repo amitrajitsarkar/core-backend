@@ -52,8 +52,7 @@ class AuthController {
       if(!newPassword || !token){
         throw new E.BadRequestError();
       }
-      console.log(newPassword);
-      console.log(token);
+
 
       const x = await this.authlogic.resetPasswordService({token , newPassword , repeatNewPassword});
       res.status(200).json(
