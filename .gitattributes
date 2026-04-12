@@ -23,3 +23,15 @@
 
 # Lock files 
 package-lock.json merge=ours
+
+#git 
+
+# specific
+.gitattributes text eol=lf
+.gitignore text eol=lf
+
+#diff 
+*.pdf binary
+*.zip binary
+*.tar binary
+*.gz binary
