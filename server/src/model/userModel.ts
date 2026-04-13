@@ -8,6 +8,10 @@ const UserSchema = new Schema({
         required: false, // for the OAuth users
         sparse:true,
       },
+      balance:{
+        type: Number,
+        default:0
+      },
       resetToken:{
         type:String,
         required : false
