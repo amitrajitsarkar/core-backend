@@ -14,6 +14,7 @@ import emailRouter from "./email.route";
 import resetPasswordRouter from "./reset-password.route";
 import testRouter from "./TEST.route";
 import logoutRouter from "./logout.route";
+import transactionRouter from "./transaction.route"
 
 
 // ! testing route
@@ -37,7 +38,9 @@ router.use(OAuthGithubRoute);                        // /auth/github, /auth/gith
 router.use("/api/v1", availableUserRouter);           // /api/v1/admin/userdata  api/v1/moderator/userdata
 
 router.use("/api/v1/user", emailRouter);             // api/v1/user/email/health -- for testing the email(gmail) service
-                                                     // api/v1/user/email/forgot-password
-router.use("/api/v1/user", resetPasswordRouter)
+
+router.use("/api/v1/user", resetPasswordRouter)      // api/v1/user/email/forgot-password
+
+router.use("/api/v1/user" , transactionRouter)
 
 export default router ;

@@ -4,7 +4,7 @@ import transactionStructure from "../utils/transactions.utils";
 
 import type { TransactionDataTypes } from "../@types/transaction";
 
-class Transactions{
+class TransactionService{
     
     public transaction = async(data : TransactionDataTypes)=>{
         const transaactionFunction = async(session:mongoose.ClientSession):Promise<void> =>{
@@ -26,4 +26,4 @@ class Transactions{
 }
 
 
-export default Transactions;
+export default TransactionService;
