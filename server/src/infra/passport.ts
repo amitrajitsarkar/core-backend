@@ -1,4 +1,3 @@
-// can also be in the config area
 
 import passport from "passport";
 
@@ -25,12 +24,10 @@ passport.use(
       done: VerifyCallback,
     ) => {
       try {
-        // finding the user is any by goofle as provider
         const existingUser = await userModel.findOne({
           provider: "google",
           providerId: profile.id,
         });
-        // not found --> create one in the db
 
         const email = profile.emails?.[0]?.value;
 
@@ -42,7 +39,7 @@ passport.use(
             name: profile.displayName,
             role: "user",
             ...(profile.username ? { username: profile.username } : {}),
-            ...(email ? { email } : {}), // this is used to satisfy the type email in ORM
+            ...(email ? { email } : {}), 
           }));
 
         const requestuser: RequestUser = {
@@ -93,7 +90,7 @@ passport.use(
             name: profile.displayName,
             role:"user",
             ...(profile.username ? { username: profile.username } : {}),
-            ...(email ? { email } : {}), // this is used to satisfy the type email in ORM
+            ...(email ? { email } : {}), 
           }));
 
         const requestuser: RequestUser = {

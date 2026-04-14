@@ -80,4 +80,16 @@ export class TransactionLimitError  extends AppError {
     }
 }
 
+export class InvalidAmountTransactionError  extends AppError {
+    constructor(message:string = "Transaction amount must be greater than zero"){
+        super(message,400) ; 
+    }
+}
+
+export class InsufficientBalanceError  extends AppError {
+    constructor(message:string = "Insufficient balance"){
+        super(message,400) ; 
+    }
+}
+
 

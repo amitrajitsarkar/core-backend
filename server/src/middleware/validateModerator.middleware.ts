@@ -1,6 +1,5 @@
 import { Response, Request, NextFunction } from "express";
 import * as E from "../utils/specificErrors"
-// checks if the login user is admin or not if not --> not allowed
 const validateModerator = (req:Request ,res:Response,next:NextFunction)=>{
     try{
         if(req.user)

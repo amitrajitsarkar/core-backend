@@ -95,7 +95,7 @@ export class UpdateController {
                     role: user.role,
                     ...(user.username != undefined
                         ? { username: user.username }
-                        : {}), // null is neede for db thats why
+                        : {}), 
                     ...(user.email != undefined ? { email: user.email } : {}),
                 };
 

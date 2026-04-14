@@ -37,7 +37,7 @@ router.use(OAuthGithubRoute);                        // /auth/github, /auth/gith
 
 router.use("/api/v1", availableUserRouter);           // /api/v1/admin/userdata  api/v1/moderator/userdata
 
-router.use("/api/v1/user", emailRouter);             // api/v1/user/email/health -- for testing the email(gmail) service
+router.use("/api/v1/user", emailRouter);             // api/v1/user/email/health 
 
 router.use("/api/v1/user", resetPasswordRouter)      // api/v1/user/email/forgot-password
 

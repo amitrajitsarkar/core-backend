@@ -21,7 +21,7 @@ export const logger = pino({
   },
   transport: {
     targets: [
-      // ✅ always write to files
+     
       {
         target: 'pino-roll',
         level: 'info',
@@ -44,7 +44,6 @@ export const logger = pino({
           mkdir: true,
         },
       },
-      // ✅ additionally pretty print in dev
       ...(isDev
         ? [
             {

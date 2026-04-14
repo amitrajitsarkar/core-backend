@@ -46,7 +46,6 @@ class AuthController {
   resetPassword = async(req:Request , res:Response,next:NextFunction)=>{
     try{
       const {newPassword,repeatNewPassword} = req.body ;
-      // const token = req.query.token as unknown as string;
       const token = String(req.query.token);
 
       if(!newPassword || !token){

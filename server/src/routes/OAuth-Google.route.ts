@@ -17,8 +17,6 @@ OAuthGoogleRouter.get("/auth/google",
     passport.authenticate("google" ,{ scope : ["profile" , "email"] })
 );
 
-
-// Google comes back here 
 OAuthGoogleRouter.get("/auth/google/callback",
     passport.authenticate("google" , {session : false , failureRedirect: "/login"}),
     (req,res)=>{

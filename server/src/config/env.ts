@@ -29,8 +29,6 @@ const envSchema = z
     .refine((pwd) => {
       const match = (pwd.match(/[0-9]/g) || []).length;
 
-      // if(match >=2) return true ;
-      // return false ;  or simply
 
       return match >= 2;
     }, "Must have 2 numbers"),

@@ -3,7 +3,7 @@ import * as E from "../utils/specificErrors";
 import { RequestUser } from "../@types/requestUser";
 import { userModel } from "../model/userModel";
 
-// sets the 
+
 const setReqHeader = async(req:Request,res:Response,next:NextFunction)=>{
     
     try{
