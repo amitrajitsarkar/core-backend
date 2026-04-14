@@ -1,31 +1,20 @@
 # Core Backend 
-A production-grade Backend as a Service (BaaS) platform built with Node.js, Express, and TypeScript. Provides comprehensive API infrastructure for authentication, data management, user control, and email services.
+A production-grade backend service built with Node.js, Express, and TypeScript. Designed as a personal API infrastructure for authentication, data management, 
+user control, and email services.
 
 ## Table of Contents
 
 - [Overview](#overview)
-
 - [Tech Stack](#tech-stack)
-
 - [Logging](#logging)
-
 - [Architecture & Key Features](#architecture--key-features)
-
 - [Prerequisites](#prerequisites)
-
 - [Environment Variables](#environment-variables)
-
 - [Environment Variable Details](#environment-variable-details)
-
 - [Installation & Setup](#installation--setup)
-
 - [Running with Docker](#running-with-docker)
-
 - [API Endpoints](#api-endpoints)
-
 - [Project Structure](#project-structure)
-
-
 
 ## Overview
 - **Multi-factor authentication** via JWT tokens and OAuth providers (Google, GitHub)
