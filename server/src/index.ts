@@ -14,6 +14,9 @@ import passport from "passport";
 import errorHandler from "./middleware/errorHandler.middlewares";
 
 import router from "./routes/index.route";
+import { createtransactionRateLimit } from "./middleware/transactionRateLimit.middleware";
+
+import { RateLimitRequestHandler } from "express-rate-limit";
 
 const app = express();
 const PORT = env.PORT;
@@ -31,12 +34,14 @@ app.get("/health", (_, res) => {
 });
 
 
-app.use(router);
 
 const bootstrap = async (): Promise<void> => {
   try {
     await connectDb();
     await connectRedis();
+
+    app.use(router);
+    app.use(errorHandler);
 
     app.listen(PORT,"0.0.0.0", () => {
       logger.info(`Server is running on port ${PORT}`);
@@ -50,4 +55,4 @@ const bootstrap = async (): Promise<void> => {
 
 bootstrap();
 
-app.use(errorHandler);
+

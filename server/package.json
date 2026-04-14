@@ -24,6 +24,7 @@
     "cors": "^2.8.5",
     "dotenv": "^17.2.3",
     "express": "^5.2.1",
+    "express-rate-limit": "^8.3.2",
     "jsonwebtoken": "^9.0.3",
     "mongoose": "^9.1.4",
     "nodemailer": "^8.0.1",
@@ -33,6 +34,7 @@
     "pino": "^10.3.1",
     "pino-http": "^11.0.0",
     "pino-roll": "^4.0.0",
+    "rate-limit-redis": "^4.3.1",
     "redis": "^5.11.0",
     "zod": "^4.3.5"
   },

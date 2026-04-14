@@ -8,7 +8,6 @@ import type { RepoObject } from '../repository/token.repository';
 import * as mailService from '../config/email.config';
 
 import * as customErrors from '../utils/specificErrors'; // import as namespace
-import { token } from 'morgan';
 import CreateToken from '../utils/createToken';
 // import type ParsedQs
 

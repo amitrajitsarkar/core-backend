@@ -74,4 +74,10 @@ export class PasswordMismatchError  extends AppError {
     }
 }
 
+export class TransactionLimitError  extends AppError {
+    constructor(message:string = "Transaction amount cannot exceed ₹2,00,000"){
+        super(message,400) ; 
+    }
+}
+
 

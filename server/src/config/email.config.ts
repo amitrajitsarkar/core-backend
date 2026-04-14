@@ -61,7 +61,6 @@ async function sendWelcomeEmail(
         return info.messageId;
     } catch (err) {
         logger.error({Error : err} , "Email error");
-        console.log("Email error:", err);
         throw new E.emailError('Failed to send welcome email');
     }
 }

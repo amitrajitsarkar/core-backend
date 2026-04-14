@@ -46,7 +46,9 @@ const envSchema = z
 
     LOG_LEVEL:z.string(),
 
-    REDIS_EXP_SEC : z.coerce.number()
+    REDIS_EXP_SEC : z.coerce.number(),
+
+    MAX_TRANSFER_LIMIT : z.coerce.number()
   })
   .strict();
 
@@ -77,5 +79,7 @@ export const env = envSchema.parse({
   LOG_LEVEL : process.env.LOG_LEVEL,
 
   REDIS_EXP_SEC : process.env.REDIS_EXP_SEC,
-  REDIS_HOST : process.env.REDIS_HOST
+  REDIS_HOST : process.env.REDIS_HOST,
+
+  MAX_TRANSFER_LIMIT : process.env.MAX_TRANSFER_LIMIT
 });
