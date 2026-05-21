@@ -12,13 +12,13 @@ import OAuthGithubRoute from "./OAuth-Github.route";
 import availableUserRouter from "./availableUsers.route";
 import emailRouter from "./email.route";
 import resetPasswordRouter from "./reset-password.route";
-import testRouter from "./TEST.route";
+// import testRouter from "./TEST.route";
 import logoutRouter from "./logout.route";
 import transactionRouter from "./transaction.route"
 
 
 // ! testing route
-router.use(testRouter); // mimicking the FE
+// router.use(testRouter); // mimicking the FE
 
 // Everything else grouped
 router.use("/api/v1/auth", signupRouter);           // /api/v1/auth/signup, 
