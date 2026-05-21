@@ -37,8 +37,18 @@ app.get("/health", (_, res) => {
 
 const bootstrap = async (): Promise<void> => {
   try {
+    logger.info("Starting server...");
+    
+    logger.info("Connecting to database...");
+
     await connectDb();
-    await connectRedis();
+    logger.info("Database connected successfully");
+
+    logger.info("Connecting to Redis...");
+
+    // await connectRedis();
+    logger.info("Redis connected successfully");
+
 
     app.use(router);
     app.use(errorHandler);
@@ -53,6 +63,9 @@ const bootstrap = async (): Promise<void> => {
   }
 };
 
-bootstrap();
+bootstrap().catch((err) => {
+  logger.error(err, "Unhandled error in bootstrap");
+  process.exit(1);
+});
 
 

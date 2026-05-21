@@ -16,7 +16,7 @@ const envSchema = z
       },
       { message: "Invalid url from MONGO_URI" },
     ),
-    REDIS_HOST :z.string(),
+    REDIS_HOST :z.string().optional(),
     SALT: z.coerce.number().min(10).default(12),
     ACCESS_SECRET_KEY : z.string().min(64, "JWT secret must be at least 64 characters"),
     REFRESH_SECRET_KEY : z.string().min(64, "JWT secret must be at least 64 characters"),
