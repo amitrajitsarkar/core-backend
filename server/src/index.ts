@@ -41,7 +41,7 @@ const bootstrap = async (): Promise<void> => {
     
     logger.info("Connecting to database...");
 
-    await connectDb();
+    // await connectDb();
     logger.info("Database connected successfully");
 
     logger.info("Connecting to Redis...");
