@@ -46,7 +46,7 @@ const bootstrap = async (): Promise<void> => {
 
     logger.info("Connecting to Redis...");
 
-    // await connectRedis();
+    await connectRedis();
     logger.info("Redis connected successfully");
 
 
