@@ -19,7 +19,7 @@ import { createtransactionRateLimit } from "./middleware/transactionRateLimit.mi
 import { RateLimitRequestHandler } from "express-rate-limit";
 
 const app = express();
-const PORT = process.env.PORT|| 5000;
+const PORT = Number(process.env.PORT)|| 5000;
 const httpLogger = pinoHttp({logger});
 
 app.use(cors());
