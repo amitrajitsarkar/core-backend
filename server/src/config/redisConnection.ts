@@ -13,8 +13,13 @@ redisClient.on("error" , (err)=>{
 })
 
 export const connectRedis = async()=>{
-    if(!redisClient.isOpen){
-        await redisClient.connect();
-        logger.info("Redis is connected");
+
+    try{
+        if(!redisClient.isOpen){
+            await redisClient.connect();
+            logger.info("Redis is connected");
+        }
+    }catch(err){
+        logger.error({ err }, "Redis unavailable, continuing startup");
     }
 }
