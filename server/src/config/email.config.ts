@@ -31,7 +31,6 @@ async function sendResetEmail(toEmail: string, resetUrl: string) {
 
         return info.messageId;
     } catch (err) {
-        
         throw new E.emailError('Failed to send password reset email');
     }
 }
@@ -78,26 +77,26 @@ async function sendOTPEmail(toEmail: string, otp: string) {
 // Test Email - mail health route is using it
 async function sendTestEmail(toEmail: string) {
     try {
-        const tamplate = fs.readFileSync(
+        
+        const template = fs.readFileSync(
             path.join(__dirname, '../utils/templates/testing.html'),
             'utf-8',
         );
-
         await transporter.verify();
+
         logger.info('✅ Transporter ready');
 
         const info = await transporter.sendMail({
             from: '"Core-Backend" <backend.system.service@gmail.com>',
             to: toEmail,
             subject: 'Something .....',
-            html: tamplate,
+            html: template,
         });
+
         logger.info({Accepted: info.accepted} , 'Accepted');
         logger.info({ response: info.response }, 'Response');
         logger.info({ messageId: info.messageId }, 'MessageId');
         logger.warn({ rejected: info.rejected }, 'Rejected');
-
-        console.log('To : ', toEmail);
         return info;
     } catch (err) {
         

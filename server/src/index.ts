@@ -15,7 +15,6 @@ import errorHandler from "./middleware/errorHandler.middlewares";
 
 import router from "./routes/index.route";
 import { createtransactionRateLimit } from "./middleware/transactionRateLimit.middleware";
-
 import { RateLimitRequestHandler } from "express-rate-limit";
 
 const app = express();
