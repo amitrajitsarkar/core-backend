@@ -1,5 +1,6 @@
 import crypto from 'node:crypto';
 import { env } from '../config/env';
+import { logger } from "../utils/logger"
 import bcrypt from 'bcrypt';
 import { userModel } from '../model/userModel';
 import type { CreateUserInputType } from '../schema/user.schema';
@@ -37,12 +38,7 @@ class AuthService {
         
         const hashed = await bcrypt.hash(data.password, this.SALT);
 
-        //* sendig the mail
-        await mailService.sendWelcomeEmail(
-            data.email,
-            showUsername,
-            env.CLIENT_URL,
-        );
+        
 
         const user = await userModel.create({
             username: username,
@@ -50,6 +46,15 @@ class AuthService {
             email: data.email,
             createdAt: Date.now(),
             role: 'user',
+        });
+
+        //* sendig the mail
+        await mailService.sendWelcomeEmail(
+            data.email,
+            showUsername,
+            env.CLIENT_URL,
+        ).catch((err) => {
+            logger.error({err} ,"Welcome Mail failed")
         });
 
         return {
