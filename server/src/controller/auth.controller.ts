@@ -21,13 +21,13 @@ class AuthController {
 
     res.cookie('accessToken' , user.accessToken ,{
       httpOnly:true,
-      secure: false, //  only for dev env. 
+      secure: process.env.NODE_ENV === 'production', 
       sameSite: 'strict' ,
       maxAge: 15*60*1000, // 15 min
     })  
     res.cookie('refreshToken' , user.refreshToken ,{
       httpOnly:true,
-      secure: false, //  only for dev env. 
+      secure: process.env.NODE_ENV === 'production',
       sameSite:'strict' ,
       maxAge: 7*24*60*60*1000,
     })  

@@ -2,7 +2,8 @@ import { env } from '../config/env';
 import pino from 'pino';
 import path from 'node:path';
 
-const isDev = process.env.NODE_ENV !== 'production';
+// const isDev = process.env.NODE_ENV !== 'production';
+const isDev = true;
 
 export const logger = pino({
   level: env.LOG_LEVEL || 'info',

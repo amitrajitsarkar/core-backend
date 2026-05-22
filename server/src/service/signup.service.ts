@@ -37,9 +37,7 @@ class AuthService {
         }
         
         const hashed = await bcrypt.hash(data.password, this.SALT);
-
-        
-
+console.log("reached here!!")
         const user = await userModel.create({
             username: username,
             password: hashed,
@@ -47,7 +45,7 @@ class AuthService {
             createdAt: Date.now(),
             role: 'user',
         });
-
+console.log("created !!")
         //* sendig the mail
         await mailService.sendWelcomeEmail(
             data.email,
