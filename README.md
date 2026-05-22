@@ -381,23 +381,26 @@ GET    api/v1/user/email/health               - Email health check
 
 ```
 .
-├── .gitattributes
-├── .gitignore
-├── .npmrc
 ├── CODE_OF_CONDUCT.md
 ├── LICENSE
 ├── README.md
 ├── client
+├── desktop.ini
 └── server
-    ├── .env.example
     ├── Dockerfile
+    ├── logs
+    │   ├── app.2026-04-15.1.log
+    │   ├── app.2026-05-22.1.log
+    │   ├── error.2026-04-15.1.log
+    │   └── error.2026-05-22.1.log
     ├── package-lock.json
     ├── package.json
     ├── src
     │   ├── @types
     │   │   ├── UserFromDb.ts
     │   │   ├── ZodFlattenedErrors.ts
-    │   │   ├── express.d.ts
+    │   │   ├── express
+    │   │   │   └── index.d.ts
     │   │   ├── jwt.ts
     │   │   ├── passportUser.types.ts
     │   │   ├── requestUser.ts
@@ -463,6 +466,10 @@ GET    api/v1/user/email/health               - Email health check
     │   │   ├── signup.service.ts
     │   │   ├── transactions.service.ts
     │   │   └── update.service.ts
+    │   ├── update
+    │   │   ├── OAuth.md
+    │   │   ├── TODO.p
+    │   │   └── notes.md
     │   └── utils
     │       ├── ApiResponse.ts
     │       ├── AppError.ts
@@ -472,6 +479,7 @@ GET    api/v1/user/email/health               - Email health check
     │       ├── specificErrors.ts
     │       ├── templates
     │       │   ├── reset-email.html
+    │       │   ├── secret.html
     │       │   ├── testing.html
     │       │   └── welcome-email.html
     │       └── transactions.utils.ts

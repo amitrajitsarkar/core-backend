@@ -49,7 +49,6 @@ const bootstrap = async (): Promise<void> => {
     // await connectRedis();
     logger.info("Redis connected successfully");
 
-
     app.use(router);
     app.use(errorHandler);
 
@@ -67,5 +66,4 @@ bootstrap().catch((err) => {
   logger.error(err, "Unhandled error in bootstrap");
   process.exit(1);
 });
-
 

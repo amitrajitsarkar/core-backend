@@ -1,4 +1,4 @@
-import { RequestUser } from "./requestUser";
+import { RequestUser } from "../requestUser";
 
 declare global {
   namespace Express {
