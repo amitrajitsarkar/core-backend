@@ -6,7 +6,9 @@ import path from 'node:path';
 import { logger } from '../utils/logger';
 
 const transporter = nodemailer.createTransport({
-    service: 'gmail',
+    host: "smtp.gmail.com",
+    port: 587,
+    secure: false, // using the smtp handshake over the TCP one
     auth: {
         user: env.EMAIL_USER,
         pass: env.EMAIL_PASS, // the app password

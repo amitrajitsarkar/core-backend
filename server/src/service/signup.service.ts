@@ -45,16 +45,17 @@ console.log("reached here!!")
             createdAt: Date.now(),
             role: 'user',
         });
-console.log("created !!")
+    console.log("User created !!")
         //* sendig the mail
         await mailService.sendWelcomeEmail(
             data.email,
             showUsername,
             env.CLIENT_URL,
         ).catch((err) => {
-            logger.error({err} ,"Welcome Mail failed")
+            logger.error({err} ,"Welcome Mail failed");
+            console.log(err);
         });
-
+        console.log("Mail sent")
         return {
             id: user._id,
             username: user.username,

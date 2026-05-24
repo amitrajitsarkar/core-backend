@@ -2,6 +2,7 @@ import { Router } from "express";
 
 const router = Router();
 
+import dashBoardRouter from "./dashBoard.route";
 import signupRouter from "./signup.route";
 import loginRouter from "./login.route";
 import deleteUserRouter from "./deleteUser.route";
@@ -17,10 +18,11 @@ import logoutRouter from "./logout.route";
 import transactionRouter from "./transaction.route"
 
 
-// ! testing route
-// router.use(testRouter); // mimicking the FE
 
 // Everything else grouped
+
+router.use("/api/v1/user",dashBoardRouter) ;        // /api/v1/user/info
+
 router.use("/api/v1/auth", signupRouter);           // /api/v1/auth/signup, 
 router.use("/api/v1/auth", loginRouter);            // /api/v1/auth/login
 

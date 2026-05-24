@@ -7,7 +7,7 @@ const errorHandler = (err:any , req:Request, res:Response ,next : NextFunction)=
     // all the custom errors are inherited from the AppError 
     if(err instanceof ZodValidationError){
         return res.status(err.statusCode).json(
-        new ApiResponse(err.statusCode,err.message,null,false,err.error)
+        new ApiResponse(err.statusCode,err.message,null,false,undefined,err.error)
     );
     }else if(err instanceof AppError){
         return res.status(err.statusCode).json(
